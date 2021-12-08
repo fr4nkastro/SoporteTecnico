@@ -20,11 +20,17 @@ namespace Presentation
 
         public Form FormActual { get; set; }
         public Form FormActualMenu { get; set; }
-
+        private int flagCurrentTable;
+        private enum table
+        {
+            cliente, contratos, detalleContratos, detalleFacturaServicios, detalleOrdenTrabajo, detallePaquete, disponibilidadTecnico, facturaServicio,
+            ordenTrabajo, tecnicos
+        }
         public FormHome()
         {
             InitializeComponent();
             clickMemReport = false;
+            flagCurrentTable = 0;
         }
 
 
@@ -249,13 +255,122 @@ namespace Presentation
 
         private void buttonSoporte_Click(object sender, EventArgs e)
         {
-            using (var context = new DBEntities())
+            //flagCurrentTable = (int)table.cliente;
+            ////dataGridViewCliente.AllowUserToAddRows = false;
+            //using (var context = new DBEntities())
+            //{
+            //    bindingSource1.DataSource= context.CLIENTE.ToList();
+            //    dataGridViewCliente.DataSource = bindingSource1;
+            //    dataGridViewCliente.Columns[6].Visible = false;
+            //    dataGridViewCliente.Columns[7].Visible = false;
+            //    dataGridViewCliente.Columns[8].Visible = false;
+            //}
+            var frmCliente = new FormCliente();
+            OpenForm(frmCliente);
+        }
+        private void createCliente()
+        {
+            //int nRowIndex = dataGridViewCliente.Rows.Count - 1;
+            //dataGridViewCliente.Rows[nRowIndex].
+            //var row = dataGridViewCliente.CurrentRow;
+            //if ( row != null)
+            //{
+            //    string nombre = row.Cells[1].Value.ToString();
+            //    string estado = dataGridViewCliente.CurrentRow.Cells[2].Value.ToString();
+            //    string rtn = dataGridViewCliente.CurrentRow.Cells[3].Value.ToString();
+            //    string telefono = dataGridViewCliente.CurrentRow.Cells[4].Value.ToString();
+            //    string dirección = dataGridViewCliente.CurrentRow.Cells[5].Value.ToString();
+
+            //    using (var context = new DBEntities())
+            //    {
+            //        context.spAddCliente(nombre, estado, rtn, telefono, dirección);
+            //    }
+            //}
+            
+            
+        }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+            switch (flagCurrentTable)
             {
-                dataGridViewCliente.DataSource = context.CLIENTE.ToList();
-                dataGridViewCliente.Columns[6].Visible = false;
-                dataGridViewCliente.Columns[7].Visible = false;
-                dataGridViewCliente.Columns[8].Visible = false;
+                case (int)table.cliente:
+                     createCliente();
+                    break;
+                default:
+                    break;
             }
+        }
+
+        //private void dataGridViewCliente_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    Console.WriteLine(dataGridViewCliente.CurrentRow.Index);
+        //}
+
+        //private void dataGridViewCliente_Click(object sender, EventArgs e)
+        //{
+        //    dataGridViewCliente.AllowUserToAddRows = false;
+        //}
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            //using (var context = new DBEntities())
+            //{
+            //    context.spAddCliente(textBoxNombre.Text, textBoxEstado.Text, textBoxRTN.Text, textBoxTelefono.Text, textBoxDireccion.Text);
+            //}
+            //MessageBox.Show("Añadido");
+        }
+
+        private void buttonRead_Click(object sender, EventArgs e)
+        {
+            flagCurrentTable = (int)table.cliente;
+            //dataGridViewCliente.AllowUserToAddRows = false;
+            //using (var context = new DBEntities())OPE
+            //{
+            //    bindingSource1.DataSource = context.CLIENTE.ToList();
+            //    dataGridViewCliente.DataSource = bindingSource1;
+            //    dataGridViewCliente.Columns[6].Visible = false;
+            //    dataGridViewCliente.Columns[7].Visible = false;
+            //    dataGridViewCliente.Columns[8].Visible = false;
+            //}
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //using (var context = new DBEntities())
+            //{
+            //    context.spDeleteCliente(Int16.Parse(dataGridViewCliente.CurrentRow.Cells[0].Value.ToString()));
+            //}
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //var row = dataGridViewCliente.CurrentRow;
+            //if (row != null)
+            //{
+            //    int id= Int16.Parse(row.Cells[0].Value.ToString());
+            //    string nombre = row.Cells[1].Value.ToString();
+            //    string estado = row.Cells[2].Value.ToString();
+            //    string rtn = row.Cells[3].Value.ToString();
+            //    string telefono = row.Cells[4].Value.ToString();
+            //    string dirección = row.Cells[5].Value.ToString();
+
+            //    using (var context = new DBEntities())
+            //    {
+            //        context.spUpdateCliente(id,nombre,estado,rtn,telefono,dirección);
+            //    }
+            //}
+        }
+
+        private void dataGridViewCliente_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void buttonFacturacion_Click(object sender, EventArgs e)
+        {
+            var frmContrato = new FormContrato();
+            OpenForm(frmContrato);
         }
     }
 }
