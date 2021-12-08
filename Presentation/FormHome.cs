@@ -20,11 +20,17 @@ namespace Presentation
 
         public Form FormActual { get; set; }
         public Form FormActualMenu { get; set; }
-
+        private int flagCurrentTable;
+        private enum table
+        {
+            cliente, contratos, detalleContratos, detalleFacturaServicios, detalleOrdenTrabajo, detallePaquete, disponibilidadTecnico, facturaServicio,
+            ordenTrabajo, tecnicos
+        }
         public FormHome()
         {
             InitializeComponent();
             clickMemReport = false;
+            flagCurrentTable = 0;
         }
 
 
@@ -249,13 +255,47 @@ namespace Presentation
 
         private void buttonSoporte_Click(object sender, EventArgs e)
         {
+            flagCurrentTable = (int)table.cliente;
             using (var context = new DBEntities())
             {
-                dataGridViewCliente.DataSource = context.CLIENTE.ToList();
+                bindingSource1.DataSource= context.CLIENTE.ToList();
+                dataGridViewCliente.DataSource = bindingSource1;
                 dataGridViewCliente.Columns[6].Visible = false;
                 dataGridViewCliente.Columns[7].Visible = false;
                 dataGridViewCliente.Columns[8].Visible = false;
             }
+        }
+        private void createCliente()
+        {
+            //int nRowIndex = dataGridViewCliente.Rows.Count - 1;
+            //dataGridViewCliente.Rows[nRowIndex].
+
+            string nombre = dataGridViewCliente.CurrentRow.Cells[1].Value.ToString(); 
+            string estado = dataGridViewCliente.CurrentRow.Cells[2].Value.ToString(); 
+            string rtn= dataGridViewCliente.CurrentRow.Cells[3].Value.ToString(); 
+            string telefono= dataGridViewCliente.CurrentRow.Cells[4].Value.ToString();
+            string dirección = dataGridViewCliente.CurrentRow.Cells[5].Value.ToString();
+            using (var context = new DBEntities())
+            {
+                context.spAddCliente(nombre,estado,rtn,telefono,dirección);
+            }
+        }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+            switch (flagCurrentTable)
+            {
+                case (int)table.cliente:
+                     createCliente();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void dataGridViewCliente_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Console.WriteLine(dataGridViewCliente.CurrentRow.Index);
         }
     }
 }
