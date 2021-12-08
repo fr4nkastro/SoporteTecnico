@@ -40,6 +40,7 @@
         <AssociationConnector Association="DBModel.FK__FACTURA_S__orden__7E8CC4B1" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK__FACTURA_S__servi__336AA144" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK__DETALLE_C__servi__68D28DBC" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_F__servi__4AD81681" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

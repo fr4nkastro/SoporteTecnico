@@ -56,6 +56,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDetalleContrato.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetalleContrato.Designer.cs">
+      <DependentUpon>FormDetalleContrato.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDetalleFacturaServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetalleFacturaServicio.Designer.cs">
+      <DependentUpon>FormDetalleFacturaServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDetalleOrdenTrabajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetalleOrdenTrabajo.Designer.cs">
+      <DependentUpon>FormDetalleOrdenTrabajo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDetallePaquete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetallePaquete.Designer.cs">
+      <DependentUpon>FormDetallePaquete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDisponibilidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDisponibilidad.Designer.cs">
+      <DependentUpon>FormDisponibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFacturaServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFacturaServicio.Designer.cs">
+      <DependentUpon>FormFacturaServicio.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +116,24 @@
     <Compile Include="FormHome.designer.cs">
       <DependentUpon>FormHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOrdenTrabajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOrdenTrabajo.Designer.cs">
+      <DependentUpon>FormOrdenTrabajo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormServicios.Designer.cs">
+      <DependentUpon>FormServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTecnicos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTecnicos.Designer.cs">
+      <DependentUpon>FormTecnicos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormCliente.resx">
@@ -91,8 +145,35 @@
     <EmbeddedResource Include="FormCrudTablas.resx">
       <DependentUpon>FormCrudTablas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormDetalleContrato.resx">
+      <DependentUpon>FormDetalleContrato.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDetalleFacturaServicio.resx">
+      <DependentUpon>FormDetalleFacturaServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDetalleOrdenTrabajo.resx">
+      <DependentUpon>FormDetalleOrdenTrabajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDetallePaquete.resx">
+      <DependentUpon>FormDetallePaquete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDisponibilidad.resx">
+      <DependentUpon>FormDisponibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFacturaServicio.resx">
+      <DependentUpon>FormFacturaServicio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOrdenTrabajo.resx">
+      <DependentUpon>FormOrdenTrabajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormServicios.resx">
+      <DependentUpon>FormServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTecnicos.resx">
+      <DependentUpon>FormTecnicos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

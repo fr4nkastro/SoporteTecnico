@@ -369,8 +369,62 @@ namespace Presentation
 
         private void buttonFacturacion_Click(object sender, EventArgs e)
         {
-            var frmContrato = new FormContrato();
+            var frmContrato = new FormFormContrato();
             OpenForm(frmContrato);
+        }
+
+        private void buttonContratacion_Click(object sender, EventArgs e)
+        {
+            var frmDetalleContrato = new FormDetalleContrato();
+            OpenForm(frmDetalleContrato);
+        }
+
+        private void buttonConfiguracion_Click_1(object sender, EventArgs e)
+        {
+            var frmDetalleFactura = new FormDetalleFacturaServicio();
+            OpenForm(frmDetalleFactura);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var frmTabla = new FormDetalleOrdenTrabajo();
+            OpenForm(frmTabla);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var frmTabla = new FormDetallePaquete();
+            OpenForm(frmTabla);
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            var frmTabla = new FormDisponibilidad();
+            OpenForm(frmTabla);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var frmTabla = new FormFacturaServicio();
+            OpenForm(frmTabla);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var frmTabla = new FormOrdenTrabajo();
+            OpenForm(frmTabla);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var frmTabla = new FormServicios();
+            OpenForm(frmTabla);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var frmTabla = new FormTecnicos();
+            OpenForm(frmTabla);
         }
     }
 }

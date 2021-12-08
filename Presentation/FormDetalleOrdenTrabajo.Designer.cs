@@ -1,6 +1,6 @@
 ﻿namespace Presentation
 {
-    partial class FormFormContrato
+    partial class FormDetalleOrdenTrabajo
     {
         /// <summary>
         /// Required designer variable.
@@ -34,16 +34,16 @@
             this.button9 = new System.Windows.Forms.Button();
             this.buttonRead = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBoxRetrasos = new System.Windows.Forms.TextBox();
+            this.textBoxServicio = new System.Windows.Forms.TextBox();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxTecnicoID = new System.Windows.Forms.TextBox();
+            this.textBoxContrato = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxFechaFinal = new System.Windows.Forms.TextBox();
+            this.textBoxCantidad = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxFechaInicio = new System.Windows.Forms.TextBox();
+            this.textBoxTecnico = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxClienteID = new System.Windows.Forms.TextBox();
+            this.textBoxOrdenTrabajo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCliente)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -55,15 +55,14 @@
             this.dataGridViewCliente.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCliente.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewCliente.Location = new System.Drawing.Point(0, 226);
-            this.dataGridViewCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewCliente.Location = new System.Drawing.Point(0, 189);
+            this.dataGridViewCliente.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewCliente.Name = "dataGridViewCliente";
             this.dataGridViewCliente.ReadOnly = true;
             this.dataGridViewCliente.RowHeadersWidth = 51;
             this.dataGridViewCliente.RowTemplate.Height = 24;
-            this.dataGridViewCliente.Size = new System.Drawing.Size(600, 140);
+            this.dataGridViewCliente.Size = new System.Drawing.Size(800, 261);
             this.dataGridViewCliente.TabIndex = 23;
-            this.dataGridViewCliente.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCliente_CellClick);
             // 
             // panel1
             // 
@@ -71,27 +70,27 @@
             this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.buttonRead);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.textBoxRetrasos);
+            this.panel1.Controls.Add(this.textBoxServicio);
             this.panel1.Controls.Add(this.buttonAdd);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.textBoxTecnicoID);
+            this.panel1.Controls.Add(this.textBoxContrato);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.textBoxFechaFinal);
+            this.panel1.Controls.Add(this.textBoxCantidad);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBoxFechaInicio);
+            this.panel1.Controls.Add(this.textBoxTecnico);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.textBoxClienteID);
+            this.panel1.Controls.Add(this.textBoxOrdenTrabajo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(600, 226);
+            this.panel1.Size = new System.Drawing.Size(800, 189);
             this.panel1.TabIndex = 22;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(324, 143);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button8.Location = new System.Drawing.Point(308, 146);
+            this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(56, 19);
             this.button8.TabIndex = 26;
@@ -100,19 +99,18 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(264, 143);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button9.Location = new System.Drawing.Point(248, 147);
+            this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(56, 19);
             this.button9.TabIndex = 25;
             this.button9.Text = "Delete";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // buttonRead
             // 
-            this.buttonRead.Location = new System.Drawing.Point(384, 143);
-            this.buttonRead.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRead.Location = new System.Drawing.Point(368, 146);
+            this.buttonRead.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRead.Name = "buttonRead";
             this.buttonRead.Size = new System.Drawing.Size(56, 19);
             this.buttonRead.TabIndex = 24;
@@ -123,116 +121,112 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(141, 122);
+            this.label5.Location = new System.Drawing.Point(124, 78);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
+            this.label5.Size = new System.Drawing.Size(56, 13);
             this.label5.TabIndex = 23;
-            this.label5.Text = "Retrasos";
+            this.label5.Text = "ServicioID";
             // 
-            // textBoxRetrasos
+            // textBoxServicio
             // 
-            this.textBoxRetrasos.Location = new System.Drawing.Point(195, 119);
-            this.textBoxRetrasos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxRetrasos.Name = "textBoxRetrasos";
-            this.textBoxRetrasos.Size = new System.Drawing.Size(262, 20);
-            this.textBoxRetrasos.TabIndex = 22;
+            this.textBoxServicio.Location = new System.Drawing.Point(195, 75);
+            this.textBoxServicio.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxServicio.Name = "textBoxServicio";
+            this.textBoxServicio.Size = new System.Drawing.Size(262, 20);
+            this.textBoxServicio.TabIndex = 22;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(204, 143);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAdd.Location = new System.Drawing.Point(188, 146);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(56, 19);
             this.buttonAdd.TabIndex = 21;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(134, 100);
+            this.label4.Location = new System.Drawing.Point(124, 125);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 20;
-            this.label4.Text = "TecnicoID";
+            this.label4.Text = "ContratoID";
             // 
-            // textBoxTecnicoID
+            // textBoxContrato
             // 
-            this.textBoxTecnicoID.Location = new System.Drawing.Point(195, 97);
-            this.textBoxTecnicoID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxTecnicoID.Name = "textBoxTecnicoID";
-            this.textBoxTecnicoID.Size = new System.Drawing.Size(262, 20);
-            this.textBoxTecnicoID.TabIndex = 19;
+            this.textBoxContrato.Location = new System.Drawing.Point(195, 122);
+            this.textBoxContrato.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxContrato.Name = "textBoxContrato";
+            this.textBoxContrato.Size = new System.Drawing.Size(262, 20);
+            this.textBoxContrato.TabIndex = 19;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(129, 81);
+            this.label3.Location = new System.Drawing.Point(124, 102);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 18;
-            this.label3.Text = "Fecha Final";
+            this.label3.Text = "Cantidad";
             // 
-            // textBoxFechaFinal
+            // textBoxCantidad
             // 
-            this.textBoxFechaFinal.Location = new System.Drawing.Point(195, 74);
-            this.textBoxFechaFinal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxFechaFinal.Name = "textBoxFechaFinal";
-            this.textBoxFechaFinal.Size = new System.Drawing.Size(262, 20);
-            this.textBoxFechaFinal.TabIndex = 17;
+            this.textBoxCantidad.Location = new System.Drawing.Point(195, 99);
+            this.textBoxCantidad.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxCantidad.Name = "textBoxCantidad";
+            this.textBoxCantidad.Size = new System.Drawing.Size(262, 20);
+            this.textBoxCantidad.TabIndex = 17;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(126, 54);
+            this.label2.Location = new System.Drawing.Point(119, 54);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 16;
-            this.label2.Text = "Fecha Inicio";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Text = "TecnicoID";
             // 
-            // textBoxFechaInicio
+            // textBoxTecnico
             // 
-            this.textBoxFechaInicio.Location = new System.Drawing.Point(195, 51);
-            this.textBoxFechaInicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxFechaInicio.Name = "textBoxFechaInicio";
-            this.textBoxFechaInicio.Size = new System.Drawing.Size(262, 20);
-            this.textBoxFechaInicio.TabIndex = 15;
+            this.textBoxTecnico.Location = new System.Drawing.Point(195, 51);
+            this.textBoxTecnico.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxTecnico.Name = "textBoxTecnico";
+            this.textBoxTecnico.Size = new System.Drawing.Size(262, 20);
+            this.textBoxTecnico.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(141, 31);
+            this.label1.Location = new System.Drawing.Point(98, 31);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 14;
-            this.label1.Text = "ClienteID";
+            this.label1.Text = "OrdenTrabajoID";
             // 
-            // textBoxClienteID
+            // textBoxOrdenTrabajo
             // 
-            this.textBoxClienteID.Location = new System.Drawing.Point(195, 28);
-            this.textBoxClienteID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxClienteID.Name = "textBoxClienteID";
-            this.textBoxClienteID.Size = new System.Drawing.Size(262, 20);
-            this.textBoxClienteID.TabIndex = 13;
+            this.textBoxOrdenTrabajo.Location = new System.Drawing.Point(195, 28);
+            this.textBoxOrdenTrabajo.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxOrdenTrabajo.Name = "textBoxOrdenTrabajo";
+            this.textBoxOrdenTrabajo.Size = new System.Drawing.Size(262, 20);
+            this.textBoxOrdenTrabajo.TabIndex = 13;
             // 
-            // FormContrato
+            // FormDetalleOrdenTrabajo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridViewCliente);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "FormContrato";
-            this.Text = "FormContrato";
+            this.Name = "FormDetalleOrdenTrabajo";
+            this.Text = "DetalleOrdenTrabajo";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCliente)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -248,15 +242,15 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button buttonRead;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxRetrasos;
+        private System.Windows.Forms.TextBox textBoxServicio;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxTecnicoID;
+        private System.Windows.Forms.TextBox textBoxContrato;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxFechaFinal;
+        private System.Windows.Forms.TextBox textBoxCantidad;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxFechaInicio;
+        private System.Windows.Forms.TextBox textBoxTecnico;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxClienteID;
+        private System.Windows.Forms.TextBox textBoxOrdenTrabajo;
     }
 }

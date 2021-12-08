@@ -16,18 +16,34 @@ namespace Presentation
         public FormCliente()
         {
             InitializeComponent();
+            Read();
         }
 
-        private void buttonRead_Click(object sender, EventArgs e)
+
+        private void Read()
         {
-            using (var context= new DBEntities())
+            using (var context = new DBEntities())
             {
 
-                dataGridViewCliente.DataSource= context.CLIENTE.ToList();
+                dataGridViewCliente.DataSource = context.CLIENTE.ToList();
                 dataGridViewCliente.Columns[6].Visible = false;
                 dataGridViewCliente.Columns[7].Visible = false;
                 dataGridViewCliente.Columns[8].Visible = false;
             }
+
+        }
+
+        private void buttonRead_Click(object sender, EventArgs e)
+        {
+            //using (var context= new DBEntities())
+            //{
+
+            //    dataGridViewCliente.DataSource= context.CLIENTE.ToList();
+            //    dataGridViewCliente.Columns[6].Visible = false;
+            //    dataGridViewCliente.Columns[7].Visible = false;
+            //    dataGridViewCliente.Columns[8].Visible = false;
+            //}
+            Read();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -46,6 +62,7 @@ namespace Presentation
                     context.spAddCliente(nombre, estado, rtn, telefono, dirección);
                 }
             }
+            Read();
         }
 
         private void dataGridViewCliente_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -84,6 +101,7 @@ namespace Presentation
                     context.spUpdateCliente(id,nombre, estado, rtn, telefono, dirección);
                 }
             }
+            Read();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -97,6 +115,7 @@ namespace Presentation
                     context.spDeleteCliente(id);
                 }
             }
+            Read();
         }
     }
 }
