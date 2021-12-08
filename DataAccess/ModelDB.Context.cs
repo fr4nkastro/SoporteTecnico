@@ -20,6 +20,7 @@ namespace DataAccess
         public DBEntities()
             : base("name=DBEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

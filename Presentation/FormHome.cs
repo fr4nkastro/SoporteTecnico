@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,8 +55,8 @@ namespace Presentation
 
         private void FormHome_Load(object sender, EventArgs e)
         {
-            var frmCrudTablas = new FormCrudTablas();
-            OpenForm(frmCrudTablas);
+            //var frmCrudTablas = new FormCrudTablas();
+            //OpenForm(frmCrudTablas);
         }
 
         private void panelMainFrm_Paint(object sender, PaintEventArgs e)
@@ -244,6 +245,17 @@ namespace Presentation
         {
             //new FormLogin().Show();
             //this.Dispose();
+        }
+
+        private void buttonSoporte_Click(object sender, EventArgs e)
+        {
+            using (var context = new DBEntities())
+            {
+                dataGridViewCliente.DataSource = context.CLIENTE.ToList();
+                dataGridViewCliente.Columns[6].Visible = false;
+                dataGridViewCliente.Columns[7].Visible = false;
+                dataGridViewCliente.Columns[8].Visible = false;
+            }
         }
     }
 }
