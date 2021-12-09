@@ -98,5 +98,25 @@ namespace Presentation
 
             }
         }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            var row = dataGridViewCliente.CurrentRow;
+            if (row != null)
+            {
+                decimal contratoID= decimal.Parse(row.Cells[1].Value.ToString());
+                decimal clienteid = decimal.Parse(textBoxClienteID.Text);
+                DateTime fechaInicio = DateTime.Parse( textBoxFechaInicio.Text);
+                DateTime fechafinal = DateTime.Parse(textBoxFechaFinal.Text);
+                decimal tecnicoid = decimal.Parse( textBoxTecnicoID.Text);
+                int retasos = Int16.Parse(textBoxRetrasos.Text);
+
+                using (var context = new DBEntities())
+                {
+                    //context.spUpdateContrato(contratoID, clienteid, tecnicoid, fechaInicio, fechafinal, retasos);
+                }
+            }
+            Read();
+        }
     }
 }

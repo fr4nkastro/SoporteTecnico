@@ -23,13 +23,21 @@ namespace Presentation
         {
             using (var context = new DBEntities())
             {
-                dataGridViewCliente.DataSource = context.FACTURA_SERVICIO.ToList();
+                
             }
 
         }
         private void buttonRead_Click(object sender, EventArgs e)
         {
             Read();
+        }
+
+        private void FormFacturaServicio_Load(object sender, EventArgs e)
+        {
+            using(var context = new DBEntities())
+            {
+                dataGridViewCliente.DataSource= context.FACTURA_SERVICIO.ToList();
+            }
         }
     }
 }

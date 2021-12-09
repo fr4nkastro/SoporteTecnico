@@ -5,42 +5,41 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="59f06c948f1d44629676392ddf214ba6" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.CLIENTE" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.CONTRATOS" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.DETALLE_FACTURA_SERVICIO" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.DETALLE_ORDEN_TRABAJO" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.DETALLE_PAQUETE" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.DISPONIBILIDAD_TECNICOS" Width="1.5" PointX="3.75" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.FACTURA_SERVICIO" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.ORDEN_TRABAJO" Width="1.5" PointX="0.75" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.SERVICIOS" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.TECNICOS" Width="1.5" PointX="1.5" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.DETALLE_CONTRATO" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewClientesActivos" Width="1.5" PointX="7.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewClientesInactivos" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewClientesxTecnico" Width="1.5" PointX="5.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewContratacionxPaquete" Width="1.5" PointX="7.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewContratoMasContratado" Width="1.5" PointX="9.75" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewGananciasxPaquetes" Width="1.5" PointX="8.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.viewServiciosFueraDePaquetes" Width="1.5" PointX="5.75" PointY="11.25" IsExpanded="true" />
-        <AssociationConnector Association="DBModel.FK__CONTRATOS__clien__24285DB4" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__ORDEN_TRA__clien__18B6AB08" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_ClienteID" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_C__contr__67DE6983" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Contrato_Orden_Trabajo" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK_Tecnico" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_F__factu__75035A77" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_O__orden__40C49C62" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_O__servi__5B78929E" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_O__tecni__5A846E65" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_P__paque__2F9A1060" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_P__servi__2EA5EC27" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DISPONIBI__tecni__55BFB948" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__FACTURA_S__orden__7E8CC4B1" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__FACTURA_S__servi__336AA144" ManuallyRouted="false" />
-        <AssociationConnector Association="DBModel.FK__DETALLE_C__servi__68D28DBC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DBModel.CLIENTE" Width="1.5" PointX="1.5" PointY="19.875" />
+        <EntityTypeShape EntityType="DBModel.CONTRATOS" Width="1.5" PointX="3.75" PointY="27.125" />
+        <EntityTypeShape EntityType="DBModel.DETALLE_FACTURA_SERVICIO" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="DBModel.DETALLE_ORDEN_TRABAJO" Width="1.5" PointX="6" PointY="6.125" />
+        <EntityTypeShape EntityType="DBModel.DETALLE_PAQUETE" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="DBModel.DISPONIBILIDAD_TECNICOS" Width="1.5" PointX="3.75" PointY="31.5" />
+        <EntityTypeShape EntityType="DBModel.FACTURA_SERVICIO" Width="1.5" PointX="0.75" PointY="11.625" />
+        <EntityTypeShape EntityType="DBModel.ORDEN_TRABAJO" Width="1.5" PointX="1.5" PointY="23.375" />
+        <EntityTypeShape EntityType="DBModel.SERVICIOS" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="DBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBModel.TECNICOS" Width="1.5" PointX="1.5" PointY="27.375" />
+        <EntityTypeShape EntityType="DBModel.DETALLE_CONTRATO" Width="1.5" PointX="3" PointY="6.375" />
+        <EntityTypeShape EntityType="DBModel.viewClientesActivos" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBModel.viewClientesInactivos" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DBModel.viewClientesxTecnico" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DBModel.viewContratacionxPaquete" Width="1.5" PointX="8.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DBModel.viewContratoMasContratado" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBModel.viewGananciasxPaquetes" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DBModel.viewServiciosFueraDePaquetes" Width="1.5" PointX="8.75" PointY="9.75" />
+        <AssociationConnector Association="DBModel.FK__CONTRATOS__clien__24285DB4" />
+        <AssociationConnector Association="DBModel.FK__ORDEN_TRA__clien__18B6AB08" />
+        <AssociationConnector Association="DBModel.FK_ClienteID" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_C__contr__67DE6983" />
+        <AssociationConnector Association="DBModel.FK_Contrato_Orden_Trabajo" />
+        <AssociationConnector Association="DBModel.FK_Tecnico" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_F__factu__75035A77" />
         <AssociationConnector Association="DBModel.FK__DETALLE_F__servi__4AD81681" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_O__orden__40C49C62" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_O__servi__5B78929E" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_O__tecni__5A846E65" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_P__paque__2F9A1060" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_P__servi__2EA5EC27" />
+        <AssociationConnector Association="DBModel.FK__DISPONIBI__tecni__55BFB948" />
+        <AssociationConnector Association="DBModel.FK__FACTURA_S__orden__7E8CC4B1" />
+        <AssociationConnector Association="DBModel.FK__DETALLE_C__servi__68D28DBC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

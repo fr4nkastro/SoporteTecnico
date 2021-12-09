@@ -11,9 +11,9 @@ using DataAccess;
 
 namespace Presentation
 {
-    public partial class FormCliente : Form
+    public partial class FormProcesoGestionCliente : Form
     {
-        public FormCliente()
+        public FormProcesoGestionCliente()
         {
             InitializeComponent();
             Read();

@@ -10,15 +10,12 @@
 namespace DataAccess
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class viewClientesInactivos
+    public partial class spFacturasPorMesDeXCliente_Result
     {
-        public decimal id { get; set; }
-        public string nombre { get; set; }
-        public string estado { get; set; }
-        public string RTN { get; set; }
-        public string telefono { get; set; }
-        public string direccion { get; set; }
+        public Nullable<int> ClienteID { get; set; }
+        public Nullable<int> ano { get; set; }
+        public Nullable<int> mes { get; set; }
+        public Nullable<double> total { get; set; }
     }
 }

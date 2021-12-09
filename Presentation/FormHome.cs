@@ -265,8 +265,8 @@ namespace Presentation
             //    dataGridViewCliente.Columns[7].Visible = false;
             //    dataGridViewCliente.Columns[8].Visible = false;
             //}
-            var frmCliente = new FormCliente();
-            OpenForm(frmCliente);
+            var frmOrdenesTrabajo = new FormProcesoOrdenTrabajo();
+            OpenForm(frmOrdenesTrabajo);
         }
         private void createCliente()
         {
@@ -369,20 +369,20 @@ namespace Presentation
 
         private void buttonFacturacion_Click(object sender, EventArgs e)
         {
-            var frmContrato = new FormFormContrato();
-            OpenForm(frmContrato);
+            var frmContratacion = new FormProcesoContratacion();
+            OpenForm(frmContratacion);
         }
 
         private void buttonContratacion_Click(object sender, EventArgs e)
         {
-            var frmDetalleContrato = new FormDetalleContrato();
-            OpenForm(frmDetalleContrato);
+            var frmFacturacion = new FormProcesoFacturacion();
+            OpenForm(frmFacturacion);
         }
 
         private void buttonConfiguracion_Click_1(object sender, EventArgs e)
         {
-            var frmDetalleFactura = new FormDetalleFacturaServicio();
-            OpenForm(frmDetalleFactura);
+            var frmGestionServicios = new FormProcesoServicios();
+            OpenForm(frmGestionServicios);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -425,6 +425,12 @@ namespace Presentation
         {
             var frmTabla = new FormTecnicos();
             OpenForm(frmTabla);
+        }
+
+        private void buttonGestionClientes_Click(object sender, EventArgs e)
+        {
+            var frmGestionClientes = new FormProcesoGestionCliente();
+            OpenForm(frmGestionClientes);
         }
     }
 }

@@ -56,6 +56,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormProcesoContratacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcesoContratacion.Designer.cs">
+      <DependentUpon>FormProcesoContratacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProcesoFacturacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcesoFacturacion.Designer.cs">
+      <DependentUpon>FormProcesoFacturacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProcesoOrdenTrabajo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcesoOrdenTrabajo.Designer.cs">
+      <DependentUpon>FormProcesoOrdenTrabajo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDetalleContrato.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,11 +110,11 @@
     <Compile Include="FormFacturaServicio.Designer.cs">
       <DependentUpon>FormFacturaServicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCliente.cs">
+    <Compile Include="FormProcesoGestionCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCliente.Designer.cs">
-      <DependentUpon>FormCliente.cs</DependentUpon>
+    <Compile Include="FormProcesoGestionCliente.Designer.cs">
+      <DependentUpon>FormProcesoGestionCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="FormContrato.cs">
       <SubType>Form</SubType>
@@ -122,6 +140,12 @@
     <Compile Include="FormOrdenTrabajo.Designer.cs">
       <DependentUpon>FormOrdenTrabajo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormProcesoServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcesoServicios.Designer.cs">
+      <DependentUpon>FormProcesoServicios.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormServicios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,8 +160,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormCliente.resx">
-      <DependentUpon>FormCliente.cs</DependentUpon>
+    <EmbeddedResource Include="FormProcesoContratacion.resx">
+      <DependentUpon>FormProcesoContratacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcesoFacturacion.resx">
+      <DependentUpon>FormProcesoFacturacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcesoOrdenTrabajo.resx">
+      <DependentUpon>FormProcesoOrdenTrabajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcesoGestionCliente.resx">
+      <DependentUpon>FormProcesoGestionCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormContrato.resx">
       <DependentUpon>FormContrato.cs</DependentUpon>
@@ -168,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormOrdenTrabajo.resx">
       <DependentUpon>FormOrdenTrabajo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcesoServicios.resx">
+      <DependentUpon>FormProcesoServicios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormServicios.resx">
       <DependentUpon>FormServicios.cs</DependentUpon>

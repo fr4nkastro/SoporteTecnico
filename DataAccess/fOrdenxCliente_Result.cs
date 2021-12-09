@@ -10,15 +10,13 @@
 namespace DataAccess
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class viewClientesInactivos
+    public partial class fOrdenxCliente_Result
     {
-        public decimal id { get; set; }
-        public string nombre { get; set; }
-        public string estado { get; set; }
-        public string RTN { get; set; }
-        public string telefono { get; set; }
-        public string direccion { get; set; }
+        public Nullable<int> OrdeTrabajoID { get; set; }
+        public Nullable<int> ClienteID { get; set; }
+        public string NombreCliente { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFinal { get; set; }
     }
 }

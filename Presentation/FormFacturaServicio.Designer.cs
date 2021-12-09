@@ -205,6 +205,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FormFacturaServicio";
             this.Text = "FacturaServicio";
+            this.Load += new System.EventHandler(this.FormFacturaServicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCliente)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
