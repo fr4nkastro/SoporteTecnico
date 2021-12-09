@@ -52,6 +52,11 @@
             this.Controls.Add(this.dataGridViewTablaGenerica);
             this.Name = "FormTabla";
             this.Text = "FormTabla";
+            this.Deactivate += new System.EventHandler(this.FormTabla_Deactivate);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTabla_FormClosing);
+            this.EnabledChanged += new System.EventHandler(this.FormTabla_EnabledChanged);
+            this.VisibleChanged += new System.EventHandler(this.FormTabla_VisibleChanged);
+            this.Leave += new System.EventHandler(this.FormTabla_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTablaGenerica)).EndInit();
             this.ResumeLayout(false);
 
