@@ -188,6 +188,13 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewContratoMasContratado' d
           <Property Name="Cantidad" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'ProyectoDBII_Last.dbo.viewDisponibilidadTecnico' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="viewDisponibilidadTecnico">
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Desde" Type="datetime" />
+          <Property Name="Hasta" Type="datetime" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewGananciasxPaquetes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="viewGananciasxPaquetes">
           <Key>

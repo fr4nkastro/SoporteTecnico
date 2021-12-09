@@ -71,6 +71,7 @@
     <Compile Include="DISPONIBILIDAD_TECNICOS.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\viewDisponibilidadTecnicos.cs" />
     <Compile Include="FACTURA_SERVICIO.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
