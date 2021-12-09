@@ -65,6 +65,7 @@
             this.dataGridViewCliente.RowTemplate.Height = 24;
             this.dataGridViewCliente.Size = new System.Drawing.Size(800, 261);
             this.dataGridViewCliente.TabIndex = 23;
+            this.dataGridViewCliente.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCliente_CellClick);
             // 
             // panel1
             // 
@@ -167,6 +168,7 @@
             this.buttonAdd.TabIndex = 21;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // label4
             // 
@@ -249,6 +251,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FormDetalleFacturaServicio";
             this.Text = "DetalleFacturaServicio";
+            this.Load += new System.EventHandler(this.FormDetalleFacturaServicio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCliente)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

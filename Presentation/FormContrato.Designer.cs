@@ -30,7 +30,7 @@
         {
             this.dataGridViewCliente = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.buttonRead = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -56,7 +56,7 @@
             this.dataGridViewCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCliente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCliente.Location = new System.Drawing.Point(0, 226);
-            this.dataGridViewCliente.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewCliente.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewCliente.Name = "dataGridViewCliente";
             this.dataGridViewCliente.ReadOnly = true;
             this.dataGridViewCliente.RowHeadersWidth = 51;
@@ -67,7 +67,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button8);
+            this.panel1.Controls.Add(this.buttonUpdate);
             this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.buttonRead);
             this.panel1.Controls.Add(this.label5);
@@ -83,25 +83,26 @@
             this.panel1.Controls.Add(this.textBoxClienteID);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(600, 226);
             this.panel1.TabIndex = 22;
             // 
-            // button8
+            // buttonUpdate
             // 
-            this.button8.Location = new System.Drawing.Point(324, 143);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(56, 19);
-            this.button8.TabIndex = 26;
-            this.button8.Text = "Update";
-            this.button8.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Location = new System.Drawing.Point(324, 143);
+            this.buttonUpdate.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(56, 19);
+            this.buttonUpdate.TabIndex = 26;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // button9
             // 
             this.button9.Location = new System.Drawing.Point(264, 143);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(56, 19);
             this.button9.TabIndex = 25;
@@ -112,7 +113,7 @@
             // buttonRead
             // 
             this.buttonRead.Location = new System.Drawing.Point(384, 143);
-            this.buttonRead.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRead.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRead.Name = "buttonRead";
             this.buttonRead.Size = new System.Drawing.Size(56, 19);
             this.buttonRead.TabIndex = 24;
@@ -133,7 +134,7 @@
             // textBoxRetrasos
             // 
             this.textBoxRetrasos.Location = new System.Drawing.Point(195, 119);
-            this.textBoxRetrasos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxRetrasos.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxRetrasos.Name = "textBoxRetrasos";
             this.textBoxRetrasos.Size = new System.Drawing.Size(262, 20);
             this.textBoxRetrasos.TabIndex = 22;
@@ -141,7 +142,7 @@
             // buttonAdd
             // 
             this.buttonAdd.Location = new System.Drawing.Point(204, 143);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(56, 19);
             this.buttonAdd.TabIndex = 21;
@@ -162,7 +163,7 @@
             // textBoxTecnicoID
             // 
             this.textBoxTecnicoID.Location = new System.Drawing.Point(195, 97);
-            this.textBoxTecnicoID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxTecnicoID.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxTecnicoID.Name = "textBoxTecnicoID";
             this.textBoxTecnicoID.Size = new System.Drawing.Size(262, 20);
             this.textBoxTecnicoID.TabIndex = 19;
@@ -180,7 +181,7 @@
             // textBoxFechaFinal
             // 
             this.textBoxFechaFinal.Location = new System.Drawing.Point(195, 74);
-            this.textBoxFechaFinal.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxFechaFinal.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFechaFinal.Name = "textBoxFechaFinal";
             this.textBoxFechaFinal.Size = new System.Drawing.Size(262, 20);
             this.textBoxFechaFinal.TabIndex = 17;
@@ -200,7 +201,7 @@
             // textBoxFechaInicio
             // 
             this.textBoxFechaInicio.Location = new System.Drawing.Point(195, 51);
-            this.textBoxFechaInicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxFechaInicio.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFechaInicio.Name = "textBoxFechaInicio";
             this.textBoxFechaInicio.Size = new System.Drawing.Size(262, 20);
             this.textBoxFechaInicio.TabIndex = 15;
@@ -218,20 +219,20 @@
             // textBoxClienteID
             // 
             this.textBoxClienteID.Location = new System.Drawing.Point(195, 28);
-            this.textBoxClienteID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxClienteID.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxClienteID.Name = "textBoxClienteID";
             this.textBoxClienteID.Size = new System.Drawing.Size(262, 20);
             this.textBoxClienteID.TabIndex = 13;
             // 
-            // FormContrato
+            // FormFormContrato
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.dataGridViewCliente);
             this.Controls.Add(this.panel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "FormContrato";
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "FormFormContrato";
             this.Text = "FormContrato";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCliente)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -244,7 +245,7 @@
 
         public System.Windows.Forms.DataGridView dataGridViewCliente;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button buttonRead;
         private System.Windows.Forms.Label label5;

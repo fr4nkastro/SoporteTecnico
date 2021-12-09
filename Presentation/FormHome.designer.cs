@@ -32,17 +32,11 @@ namespace Presentation
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHome));
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.buttonConfiguracion = new System.Windows.Forms.Button();
-            this.buttonContratacion = new System.Windows.Forms.Button();
+            this.buttonGestionClientes = new System.Windows.Forms.Button();
+            this.buttonGestionServicios = new System.Windows.Forms.Button();
             this.buttonFacturacion = new System.Windows.Forms.Button();
-            this.buttonSoporte = new System.Windows.Forms.Button();
+            this.buttonContratacion = new System.Windows.Forms.Button();
+            this.buttonOrdenesTrabajo = new System.Windows.Forms.Button();
             this.buttonLogo = new System.Windows.Forms.Button();
             this.panelMainFrm = new System.Windows.Forms.Panel();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -53,17 +47,11 @@ namespace Presentation
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.panel2.Controls.Add(this.button7);
-            this.panel2.Controls.Add(this.button6);
-            this.panel2.Controls.Add(this.button5);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.buttonConfiguracion);
-            this.panel2.Controls.Add(this.buttonContratacion);
+            this.panel2.Controls.Add(this.buttonGestionClientes);
+            this.panel2.Controls.Add(this.buttonGestionServicios);
             this.panel2.Controls.Add(this.buttonFacturacion);
-            this.panel2.Controls.Add(this.buttonSoporte);
+            this.panel2.Controls.Add(this.buttonContratacion);
+            this.panel2.Controls.Add(this.buttonOrdenesTrabajo);
             this.panel2.Controls.Add(this.buttonLogo);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -73,185 +61,45 @@ namespace Presentation
             this.panel2.TabIndex = 5;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // button7
+            // buttonGestionClientes
             // 
-            this.button7.BackColor = System.Drawing.Color.Maroon;
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(0, 678);
-            this.button7.Margin = new System.Windows.Forms.Padding(2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(290, 57);
-            this.button7.TabIndex = 36;
-            this.button7.Text = "TÉCNICOS";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.buttonGestionClientes.BackColor = System.Drawing.Color.Maroon;
+            this.buttonGestionClientes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonGestionClientes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonGestionClientes.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.buttonGestionClientes.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.buttonGestionClientes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonGestionClientes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGestionClientes.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGestionClientes.ForeColor = System.Drawing.Color.White;
+            this.buttonGestionClientes.Location = new System.Drawing.Point(0, 336);
+            this.buttonGestionClientes.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonGestionClientes.Name = "buttonGestionClientes";
+            this.buttonGestionClientes.Size = new System.Drawing.Size(290, 57);
+            this.buttonGestionClientes.TabIndex = 30;
+            this.buttonGestionClientes.Text = "Gestión de Clientes";
+            this.buttonGestionClientes.UseVisualStyleBackColor = false;
+            this.buttonGestionClientes.Click += new System.EventHandler(this.buttonGestionClientes_Click);
             // 
-            // button6
+            // buttonGestionServicios
             // 
-            this.button6.BackColor = System.Drawing.Color.Maroon;
-            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(0, 621);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(290, 57);
-            this.button6.TabIndex = 35;
-            this.button6.Text = "SERVICIOS";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.Maroon;
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(0, 564);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(290, 57);
-            this.button5.TabIndex = 34;
-            this.button5.Text = "ORDEN TRABAJO";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.Maroon;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(0, 507);
-            this.button4.Margin = new System.Windows.Forms.Padding(2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(290, 57);
-            this.button4.TabIndex = 33;
-            this.button4.Text = "FACTURA SERVICIO";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Maroon;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(0, 450);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(290, 57);
-            this.button3.TabIndex = 32;
-            this.button3.Text = "DISPONIBILIDAD TÉCNICO";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Maroon;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(0, 393);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(290, 57);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "DETALLE PAQUETE";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Maroon;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(0, 336);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(290, 57);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "DETALLE ORDEN TRABAJO";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // buttonConfiguracion
-            // 
-            this.buttonConfiguracion.BackColor = System.Drawing.Color.Maroon;
-            this.buttonConfiguracion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonConfiguracion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonConfiguracion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.buttonConfiguracion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.buttonConfiguracion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonConfiguracion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConfiguracion.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonConfiguracion.ForeColor = System.Drawing.Color.White;
-            this.buttonConfiguracion.Location = new System.Drawing.Point(0, 279);
-            this.buttonConfiguracion.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonConfiguracion.Name = "buttonConfiguracion";
-            this.buttonConfiguracion.Size = new System.Drawing.Size(290, 57);
-            this.buttonConfiguracion.TabIndex = 29;
-            this.buttonConfiguracion.Text = "DETALLE FACTURA";
-            this.buttonConfiguracion.UseVisualStyleBackColor = false;
-            this.buttonConfiguracion.Click += new System.EventHandler(this.buttonConfiguracion_Click_1);
-            // 
-            // buttonContratacion
-            // 
-            this.buttonContratacion.BackColor = System.Drawing.Color.Maroon;
-            this.buttonContratacion.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonContratacion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonContratacion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.buttonContratacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.buttonContratacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonContratacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonContratacion.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonContratacion.ForeColor = System.Drawing.Color.White;
-            this.buttonContratacion.Location = new System.Drawing.Point(0, 222);
-            this.buttonContratacion.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonContratacion.Name = "buttonContratacion";
-            this.buttonContratacion.Size = new System.Drawing.Size(290, 57);
-            this.buttonContratacion.TabIndex = 27;
-            this.buttonContratacion.Text = "DETALLE CONTRATO";
-            this.buttonContratacion.UseVisualStyleBackColor = false;
-            this.buttonContratacion.Click += new System.EventHandler(this.buttonContratacion_Click);
+            this.buttonGestionServicios.BackColor = System.Drawing.Color.Maroon;
+            this.buttonGestionServicios.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonGestionServicios.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonGestionServicios.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.buttonGestionServicios.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.buttonGestionServicios.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonGestionServicios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGestionServicios.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGestionServicios.ForeColor = System.Drawing.Color.White;
+            this.buttonGestionServicios.Location = new System.Drawing.Point(0, 279);
+            this.buttonGestionServicios.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonGestionServicios.Name = "buttonGestionServicios";
+            this.buttonGestionServicios.Size = new System.Drawing.Size(290, 57);
+            this.buttonGestionServicios.TabIndex = 29;
+            this.buttonGestionServicios.Text = "Gestión de servicios";
+            this.buttonGestionServicios.UseVisualStyleBackColor = false;
+            this.buttonGestionServicios.Click += new System.EventHandler(this.buttonConfiguracion_Click_1);
             // 
             // buttonFacturacion
             // 
@@ -264,34 +112,54 @@ namespace Presentation
             this.buttonFacturacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFacturacion.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFacturacion.ForeColor = System.Drawing.Color.White;
-            this.buttonFacturacion.Location = new System.Drawing.Point(0, 165);
+            this.buttonFacturacion.Location = new System.Drawing.Point(0, 222);
             this.buttonFacturacion.Margin = new System.Windows.Forms.Padding(2);
             this.buttonFacturacion.Name = "buttonFacturacion";
             this.buttonFacturacion.Size = new System.Drawing.Size(290, 57);
-            this.buttonFacturacion.TabIndex = 26;
-            this.buttonFacturacion.Text = "CONTRATO";
+            this.buttonFacturacion.TabIndex = 27;
+            this.buttonFacturacion.Text = "Facturación";
             this.buttonFacturacion.UseVisualStyleBackColor = false;
-            this.buttonFacturacion.Click += new System.EventHandler(this.buttonFacturacion_Click);
+            this.buttonFacturacion.Click += new System.EventHandler(this.buttonContratacion_Click);
             // 
-            // buttonSoporte
+            // buttonContratacion
             // 
-            this.buttonSoporte.BackColor = System.Drawing.Color.Maroon;
-            this.buttonSoporte.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSoporte.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonSoporte.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
-            this.buttonSoporte.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
-            this.buttonSoporte.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.buttonSoporte.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSoporte.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSoporte.ForeColor = System.Drawing.Color.White;
-            this.buttonSoporte.Location = new System.Drawing.Point(0, 108);
-            this.buttonSoporte.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSoporte.Name = "buttonSoporte";
-            this.buttonSoporte.Size = new System.Drawing.Size(290, 57);
-            this.buttonSoporte.TabIndex = 21;
-            this.buttonSoporte.Text = "CLIENTE";
-            this.buttonSoporte.UseVisualStyleBackColor = false;
-            this.buttonSoporte.Click += new System.EventHandler(this.buttonSoporte_Click);
+            this.buttonContratacion.BackColor = System.Drawing.Color.Maroon;
+            this.buttonContratacion.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonContratacion.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonContratacion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.buttonContratacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.buttonContratacion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonContratacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonContratacion.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonContratacion.ForeColor = System.Drawing.Color.White;
+            this.buttonContratacion.Location = new System.Drawing.Point(0, 165);
+            this.buttonContratacion.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonContratacion.Name = "buttonContratacion";
+            this.buttonContratacion.Size = new System.Drawing.Size(290, 57);
+            this.buttonContratacion.TabIndex = 26;
+            this.buttonContratacion.Text = "Contratación";
+            this.buttonContratacion.UseVisualStyleBackColor = false;
+            this.buttonContratacion.Click += new System.EventHandler(this.buttonFacturacion_Click);
+            // 
+            // buttonOrdenesTrabajo
+            // 
+            this.buttonOrdenesTrabajo.BackColor = System.Drawing.Color.Maroon;
+            this.buttonOrdenesTrabajo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonOrdenesTrabajo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonOrdenesTrabajo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(233)))));
+            this.buttonOrdenesTrabajo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
+            this.buttonOrdenesTrabajo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonOrdenesTrabajo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOrdenesTrabajo.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOrdenesTrabajo.ForeColor = System.Drawing.Color.White;
+            this.buttonOrdenesTrabajo.Location = new System.Drawing.Point(0, 108);
+            this.buttonOrdenesTrabajo.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonOrdenesTrabajo.Name = "buttonOrdenesTrabajo";
+            this.buttonOrdenesTrabajo.Size = new System.Drawing.Size(290, 57);
+            this.buttonOrdenesTrabajo.TabIndex = 21;
+            this.buttonOrdenesTrabajo.Text = "Ordenes de Trabajo";
+            this.buttonOrdenesTrabajo.UseVisualStyleBackColor = false;
+            this.buttonOrdenesTrabajo.Click += new System.EventHandler(this.buttonSoporte_Click);
             // 
             // buttonLogo
             // 
@@ -345,19 +213,13 @@ namespace Presentation
         #endregion
         private System.Windows.Forms.Panel panel2;
         public System.Windows.Forms.Panel panelMainFrm;
-        private System.Windows.Forms.Button buttonConfiguracion;
-        private System.Windows.Forms.Button buttonContratacion;
+        private System.Windows.Forms.Button buttonGestionServicios;
         private System.Windows.Forms.Button buttonFacturacion;
-        private System.Windows.Forms.Button buttonSoporte;
+        private System.Windows.Forms.Button buttonContratacion;
+        private System.Windows.Forms.Button buttonOrdenesTrabajo;
         private System.Windows.Forms.Button buttonLogo;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Button buttonGestionClientes;
     }
 }
 

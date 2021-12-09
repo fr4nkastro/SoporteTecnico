@@ -1,6 +1,6 @@
 ﻿namespace Presentation
 {
-    partial class FormCliente
+    partial class FormProcesoGestionCliente
     {
         /// <summary>
         /// Required designer variable.

@@ -72,5 +72,38 @@ namespace Presentation
                 textBoxRealizado.Text = Realizado;
             }
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+            var row = dataGridViewCliente.CurrentRow;
+            if (row != null)
+            {
+                int id = Int16.Parse(row.Cells[2].Value.ToString());
+                using (var context = new DBEntities())
+                {
+                    context.spDeleteDetalleContrato(id);
+                }
+            }
+            Read();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            var row = dataGridViewCliente.CurrentRow;
+            if (row != null)
+            {
+                int id = Int16.Parse(row.Cells[2].Value.ToString());
+                int Contrato = Int16.Parse(textBoxContratoID.Text); 
+                int Servicio = Int16.Parse( textBoxServicioID.Text);
+            
+
+                using (var context = new DBEntities())
+                {
+                    //context.spUpdateDetalleContrato(id, Contrato, Servicio);
+                }
+            }
+            Read();
+        }
     }
 }

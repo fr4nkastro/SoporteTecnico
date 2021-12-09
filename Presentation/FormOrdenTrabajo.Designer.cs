@@ -112,6 +112,7 @@
             this.buttonRead.TabIndex = 24;
             this.buttonRead.Text = "Read";
             this.buttonRead.UseVisualStyleBackColor = true;
+            this.buttonRead.Click += new System.EventHandler(this.buttonRead_Click);
             // 
             // buttonAdd
             // 

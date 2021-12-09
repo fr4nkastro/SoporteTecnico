@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CLIENTE">
           <Key>
             <PropertyRef Name="id" />
@@ -49,6 +49,7 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.DETALLE_CONTRATO' does not h
           <Property Name="isv" Type="float" />
           <Property Name="cantidad" Type="numeric" Precision="18" Scale="0" />
           <Property Name="total" Type="float" />
+          <Property Name="servicioID" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN_TRABAJO">
           <Key>
@@ -86,7 +87,6 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.DETALLE_CONTRATO' does not h
           </Key>
           <Property Name="id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="fecha" Type="datetime" />
-          <Property Name="servicioID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="clienteID" Type="numeric" Precision="28" Scale="0" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="1" />
           <Property Name="ordenID" Type="numeric" Precision="18" Scale="0" />
@@ -254,6 +254,18 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DETALLE_F__servi__4AD81681">
+          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
+          <End Role="DETALLE_FACTURA_SERVICIO" Type="Self.DETALLE_FACTURA_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_FACTURA_SERVICIO">
+              <PropertyRef Name="servicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DETALLE_O__orden__40C49C62">
           <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
           <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
@@ -335,18 +347,6 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             </Principal>
             <Dependent Role="FACTURA_SERVICIO">
               <PropertyRef Name="ordenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__FACTURA_S__servi__336AA144">
-          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
-          <End Role="FACTURA_SERVICIO" Type="Self.FACTURA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SERVICIOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FACTURA_SERVICIO">
-              <PropertyRef Name="servicioID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,6 +455,7 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           <Parameter Name="isv" Type="float" Mode="In" />
           <Parameter Name="cantidad" Type="int" Mode="In" />
           <Parameter Name="total" Type="float" Mode="In" />
+          <Parameter Name="servicioID" Type="int" Mode="In" />
         </Function>
         <Function Name="spAddDetalleOrdenTrabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ordentrabajoid" Type="numeric" Mode="In" />
@@ -474,7 +475,6 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           <Parameter Name="hasta" Type="datetime" Mode="In" />
         </Function>
         <Function Name="spAddFacturaServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="servicioID" Type="numeric" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
           <Parameter Name="clienteID" Type="numeric" Mode="In" />
           <Parameter Name="estado" Type="varchar" Mode="In" />
@@ -578,35 +578,42 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
         <Function Name="spUpdateContrato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="contratoID" Type="numeric" Mode="In" />
           <Parameter Name="clienteID" Type="numeric" Mode="In" />
-          <Parameter Name="tecnicoID" Type="numeric" Mode="In" />
-          <Parameter Name="fechaFinalizacion" Type="date" Mode="In" />
           <Parameter Name="fechaContrato" Type="date" Mode="In" />
+          <Parameter Name="fechaFinalizacion" Type="date" Mode="In" />
+          <Parameter Name="tecnicoID" Type="numeric" Mode="In" />
           <Parameter Name="retrasos" Type="int" Mode="In" />
         </Function>
         <Function Name="spUpdateDetalleContrato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
           <Parameter Name="contratoID" Type="numeric" Mode="In" />
           <Parameter Name="servicioID" Type="numeric" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="realizado" Type="int" Mode="In" />
         </Function>
         <Function Name="spUpdateDetalleFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
           <Parameter Name="facturaID" Type="numeric" Mode="In" />
-          <Parameter Name="ordenID" Type="numeric" Mode="In" />
+          <Parameter Name="precio" Type="float" Mode="In" />
+          <Parameter Name="isv" Type="float" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="total" Type="float" Mode="In" />
+          <Parameter Name="Servicio" Type="int" Mode="In" />
         </Function>
         <Function Name="spUpdateDetalleOrdenTrabajo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
           <Parameter Name="ordentrabajoID" Type="numeric" Mode="In" />
           <Parameter Name="tecnicoID" Type="numeric" Mode="In" />
           <Parameter Name="servicioID" Type="numeric" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="contratoid" Type="int" Mode="In" />
         </Function>
         <Function Name="spUpdateDetallePaquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
           <Parameter Name="ServicioID" Type="numeric" Mode="In" />
           <Parameter Name="PaqueteID" Type="numeric" Mode="In" />
-          <Parameter Name="sc" Type="numeric" Mode="In" />
-          <Parameter Name="pc" Type="numeric" Mode="In" />
         </Function>
         <Function Name="spUpdateDisponibilidadTecnico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="tecnicoID" Type="numeric" Mode="In" />
           <Parameter Name="estado" Type="varchar" Mode="In" />
           <Parameter Name="desde" Type="datetime" Mode="In" />
@@ -614,9 +621,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
         </Function>
         <Function Name="spUpdateFacturaServicio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
-          <Parameter Name="clienteID" Type="numeric" Mode="In" />
-          <Parameter Name="servicioID" Type="numeric" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="clienteID" Type="numeric" Mode="In" />
           <Parameter Name="estado" Type="varchar" Mode="In" />
           <Parameter Name="ordenID" Type="numeric" Mode="In" />
         </Function>
@@ -735,515 +741,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
             <End Role="DETALLE_FACTURA_SERVICIO" EntitySet="DETALLE_FACTURA_SERVICIO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__orden__40C49C62" Association="Self.FK__DETALLE_O__orden__40C49C62">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__servi__5B78929E" Association="Self.FK__DETALLE_O__servi__5B78929E">
+          <AssociationSet Name="FK__DETALLE_F__servi__4AD81681" Association="Self.FK__DETALLE_F__servi__4AD81681">
             <End Role="SERVICIOS" EntitySet="SERVICIOS" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__tecni__5A846E65" Association="Self.FK__DETALLE_O__tecni__5A846E65">
-            <End Role="TECNICOS" EntitySet="TECNICOS" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_P__paque__2F9A1060" Association="Self.FK__DETALLE_P__paque__2F9A1060">
-            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
-            <End Role="DETALLE_PAQUETE" EntitySet="DETALLE_PAQUETE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_P__servi__2EA5EC27" Association="Self.FK__DETALLE_P__servi__2EA5EC27">
-            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
-            <End Role="DETALLE_PAQUETE" EntitySet="DETALLE_PAQUETE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DISPONIBI__tecni__55BFB948" Association="Self.FK__DISPONIBI__tecni__55BFB948">
-            <End Role="TECNICOS" EntitySet="TECNICOS" />
-            <End Role="DISPONIBILIDAD_TECNICOS" EntitySet="DISPONIBILIDAD_TECNICOS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__FACTURA_S__orden__7E8CC4B1" Association="Self.FK__FACTURA_S__orden__7E8CC4B1">
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__FACTURA_S__servi__336AA144" Association="Self.FK__FACTURA_S__servi__336AA144">
-            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
-            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ORDEN_TRA__clien__18B6AB08" Association="Self.FK__ORDEN_TRA__clien__18B6AB08">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClienteID" Association="Self.FK_ClienteID">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_Orden_Trabajo" Association="Self.FK_Contrato_Orden_Trabajo">
-            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tecnico" Association="Self.FK_Tecnico">
-            <End Role="TECNICOS" EntitySet="TECNICOS" />
-            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CLIENTE">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="28" Scale="0" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="RTN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CONTRATOS" Relationship="Self.FK__CONTRATOS__clien__24285DB4" FromRole="CLIENTE" ToRole="CONTRATOS" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK__ORDEN_TRA__clien__18B6AB08" FromRole="CLIENTE" ToRole="ORDEN_TRABAJO" />
-          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="Self.FK_ClienteID" FromRole="CLIENTE" ToRole="FACTURA_SERVICIO" />
-        </EntityType>
-        <EntityType Name="CONTRATOS">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="clienteID" Type="Decimal" Precision="28" Scale="0" />
-          <Property Name="fechaContrato" Type="DateTime" Precision="0" />
-          <Property Name="fechaFinalizacion" Type="DateTime" Precision="0" />
-          <Property Name="tecnicoID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="retrasos" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CONTRATOS__clien__24285DB4" FromRole="CONTRATOS" ToRole="CLIENTE" />
-          <NavigationProperty Name="DETALLE_CONTRATO" Relationship="Self.FK__DETALLE_C__contr__67DE6983" FromRole="CONTRATOS" ToRole="DETALLE_CONTRATO" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK_Contrato_Orden_Trabajo" FromRole="CONTRATOS" ToRole="DETALLE_ORDEN_TRABAJO" />
-          <NavigationProperty Name="TECNICOS" Relationship="Self.FK_Tecnico" FromRole="CONTRATOS" ToRole="TECNICOS" />
-        </EntityType>
-        <EntityType Name="DETALLE_FACTURA_SERVICIO">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="facturaID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="precio" Type="Double" />
-          <Property Name="isv" Type="Double" />
-          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="total" Type="Double" />
-          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="Self.FK__DETALLE_F__factu__75035A77" FromRole="DETALLE_FACTURA_SERVICIO" ToRole="FACTURA_SERVICIO" />
-        </EntityType>
-        <EntityType Name="DETALLE_ORDEN_TRABAJO">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ordenTrabajoID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="tecnicoId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="contratoID" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="CONTRATOS" Relationship="Self.FK_Contrato_Orden_Trabajo" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="CONTRATOS" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK__DETALLE_O__orden__40C49C62" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
-          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__DETALLE_O__servi__5B78929E" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="SERVICIOS" />
-          <NavigationProperty Name="TECNICOS" Relationship="Self.FK__DETALLE_O__tecni__5A846E65" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="TECNICOS" />
-        </EntityType>
-        <EntityType Name="DETALLE_PAQUETE">
-          <Key>
-            <PropertyRef Name="servicioID" />
-            <PropertyRef Name="paqueteID" />
-          </Key>
-          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="paqueteID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__DETALLE_P__paque__2F9A1060" FromRole="DETALLE_PAQUETE" ToRole="SERVICIOS" />
-          <NavigationProperty Name="SERVICIOS1" Relationship="Self.FK__DETALLE_P__servi__2EA5EC27" FromRole="DETALLE_PAQUETE" ToRole="SERVICIOS" />
-        </EntityType>
-        <EntityType Name="DISPONIBILIDAD_TECNICOS">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="desde" Type="DateTime" Precision="3" />
-          <Property Name="hasta" Type="DateTime" Precision="3" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="tecnicoID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="TECNICOS" Relationship="Self.FK__DISPONIBI__tecni__55BFB948" FromRole="DISPONIBILIDAD_TECNICOS" ToRole="TECNICOS" />
-        </EntityType>
-        <EntityType Name="FACTURA_SERVICIO">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Precision="3" />
-          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="clienteID" Type="Decimal" Precision="28" Scale="0" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="ordenID" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_ClienteID" FromRole="FACTURA_SERVICIO" ToRole="CLIENTE" />
-          <NavigationProperty Name="DETALLE_FACTURA_SERVICIO" Relationship="Self.FK__DETALLE_F__factu__75035A77" FromRole="FACTURA_SERVICIO" ToRole="DETALLE_FACTURA_SERVICIO" />
-          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="Self.FK__FACTURA_S__orden__7E8CC4B1" FromRole="FACTURA_SERVICIO" ToRole="ORDEN_TRABAJO" />
-          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__FACTURA_S__servi__336AA144" FromRole="FACTURA_SERVICIO" ToRole="SERVICIOS" />
-        </EntityType>
-        <EntityType Name="ORDEN_TRABAJO">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="clienteID" Type="Decimal" Precision="28" Scale="0" />
-          <Property Name="fechaInicio" Type="DateTime" Precision="3" />
-          <Property Name="fechaFinal" Type="DateTime" Precision="3" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__ORDEN_TRA__clien__18B6AB08" FromRole="ORDEN_TRABAJO" ToRole="CLIENTE" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK__DETALLE_O__orden__40C49C62" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
-          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="Self.FK__FACTURA_S__orden__7E8CC4B1" FromRole="ORDEN_TRABAJO" ToRole="FACTURA_SERVICIO" />
-        </EntityType>
-        <EntityType Name="SERVICIOS">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="precio" Type="Double" />
-          <Property Name="tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK__DETALLE_O__servi__5B78929E" FromRole="SERVICIOS" ToRole="DETALLE_ORDEN_TRABAJO" />
-          <NavigationProperty Name="DETALLE_PAQUETE" Relationship="Self.FK__DETALLE_P__paque__2F9A1060" FromRole="SERVICIOS" ToRole="DETALLE_PAQUETE" />
-          <NavigationProperty Name="DETALLE_PAQUETE1" Relationship="Self.FK__DETALLE_P__servi__2EA5EC27" FromRole="SERVICIOS" ToRole="DETALLE_PAQUETE" />
-          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="Self.FK__FACTURA_S__servi__336AA144" FromRole="SERVICIOS" ToRole="FACTURA_SERVICIO" />
-          <NavigationProperty Name="DETALLE_CONTRATO" Relationship="Self.FK__DETALLE_C__servi__68D28DBC" FromRole="SERVICIOS" ToRole="DETALLE_CONTRATO" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="TECNICOS">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="area" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CONTRATOS" Relationship="Self.FK_Tecnico" FromRole="TECNICOS" ToRole="CONTRATOS" />
-          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="Self.FK__DETALLE_O__tecni__5A846E65" FromRole="TECNICOS" ToRole="DETALLE_ORDEN_TRABAJO" />
-          <NavigationProperty Name="DISPONIBILIDAD_TECNICOS" Relationship="Self.FK__DISPONIBI__tecni__55BFB948" FromRole="TECNICOS" ToRole="DISPONIBILIDAD_TECNICOS" />
-        </EntityType>
-        <EntityType Name="DETALLE_CONTRATO">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="contratoID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="cantidad" Type="Int32" />
-          <Property Name="realizado" Type="Int32" />
-          <NavigationProperty Name="CONTRATOS" Relationship="Self.FK__DETALLE_C__contr__67DE6983" FromRole="DETALLE_CONTRATO" ToRole="CONTRATOS" />
-          <NavigationProperty Name="SERVICIOS" Relationship="Self.FK__DETALLE_C__servi__68D28DBC" FromRole="DETALLE_CONTRATO" ToRole="SERVICIOS" />
-        </EntityType>
-        <EntityType Name="viewClientesActivos">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="nombre" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="28" Scale="0" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="RTN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="viewClientesInactivos">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="nombre" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="28" Scale="0" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="RTN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="viewClientesxTecnico">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cliente" Type="Int32" />
-        </EntityType>
-        <EntityType Name="viewContratacionxPaquete">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" />
-        </EntityType>
-        <EntityType Name="viewContratoMasContratado">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int32" />
-        </EntityType>
-        <EntityType Name="viewGananciasxPaquetes">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Precio" Type="Double" />
-        </EntityType>
-        <EntityType Name="viewServiciosFueraDePaquetes">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK__CONTRATOS__clien__24285DB4">
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
-          <End Role="CONTRATOS" Type="Self.CONTRATOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CONTRATOS">
-              <PropertyRef Name="clienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ORDEN_TRA__clien__18B6AB08">
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
-          <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ORDEN_TRABAJO">
-              <PropertyRef Name="clienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClienteID">
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
-          <End Role="FACTURA_SERVICIO" Type="Self.FACTURA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTE">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FACTURA_SERVICIO">
-              <PropertyRef Name="clienteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_C__contr__67DE6983">
-          <End Role="CONTRATOS" Type="Self.CONTRATOS" Multiplicity="0..1" />
-          <End Role="DETALLE_CONTRATO" Type="Self.DETALLE_CONTRATO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTRATOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_CONTRATO">
-              <PropertyRef Name="contratoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contrato_Orden_Trabajo">
-          <End Role="CONTRATOS" Type="Self.CONTRATOS" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTRATOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="contratoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tecnico">
-          <End Role="TECNICOS" Type="Self.TECNICOS" Multiplicity="0..1" />
-          <End Role="CONTRATOS" Type="Self.CONTRATOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TECNICOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CONTRATOS">
-              <PropertyRef Name="tecnicoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_F__factu__75035A77">
-          <End Role="FACTURA_SERVICIO" Type="Self.FACTURA_SERVICIO" Multiplicity="0..1" />
-          <End Role="DETALLE_FACTURA_SERVICIO" Type="Self.DETALLE_FACTURA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FACTURA_SERVICIO">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_FACTURA_SERVICIO">
-              <PropertyRef Name="facturaID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_O__orden__40C49C62">
-          <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="ordenTrabajoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_O__servi__5B78929E">
-          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SERVICIOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="servicioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_O__tecni__5A846E65">
-          <End Role="TECNICOS" Type="Self.TECNICOS" Multiplicity="0..1" />
-          <End Role="DETALLE_ORDEN_TRABAJO" Type="Self.DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TECNICOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_ORDEN_TRABAJO">
-              <PropertyRef Name="tecnicoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_P__paque__2F9A1060">
-          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
-          <End Role="DETALLE_PAQUETE" Type="Self.DETALLE_PAQUETE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SERVICIOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_PAQUETE">
-              <PropertyRef Name="paqueteID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_P__servi__2EA5EC27">
-          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
-          <End Role="DETALLE_PAQUETE" Type="Self.DETALLE_PAQUETE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SERVICIOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_PAQUETE">
-              <PropertyRef Name="servicioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DISPONIBI__tecni__55BFB948">
-          <End Role="TECNICOS" Type="Self.TECNICOS" Multiplicity="0..1" />
-          <End Role="DISPONIBILIDAD_TECNICOS" Type="Self.DISPONIBILIDAD_TECNICOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TECNICOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DISPONIBILIDAD_TECNICOS">
-              <PropertyRef Name="tecnicoID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__FACTURA_S__orden__7E8CC4B1">
-          <End Role="ORDEN_TRABAJO" Type="Self.ORDEN_TRABAJO" Multiplicity="0..1" />
-          <End Role="FACTURA_SERVICIO" Type="Self.FACTURA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_TRABAJO">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FACTURA_SERVICIO">
-              <PropertyRef Name="ordenID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__FACTURA_S__servi__336AA144">
-          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="1" />
-          <End Role="FACTURA_SERVICIO" Type="Self.FACTURA_SERVICIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SERVICIOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FACTURA_SERVICIO">
-              <PropertyRef Name="servicioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_C__servi__68D28DBC">
-          <End Role="SERVICIOS" Type="Self.SERVICIOS" Multiplicity="0..1" />
-          <End Role="DETALLE_CONTRATO" Type="Self.DETALLE_CONTRATO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SERVICIOS">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="DETALLE_CONTRATO">
-              <PropertyRef Name="servicioID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
-          <EntitySet Name="CONTRATOS" EntityType="Self.CONTRATOS" />
-          <EntitySet Name="DETALLE_FACTURA_SERVICIO" EntityType="Self.DETALLE_FACTURA_SERVICIO" />
-          <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="Self.DETALLE_ORDEN_TRABAJO" />
-          <EntitySet Name="DETALLE_PAQUETE" EntityType="Self.DETALLE_PAQUETE" />
-          <EntitySet Name="DISPONIBILIDAD_TECNICOS" EntityType="Self.DISPONIBILIDAD_TECNICOS" />
-          <EntitySet Name="FACTURA_SERVICIO" EntityType="Self.FACTURA_SERVICIO" />
-          <EntitySet Name="ORDEN_TRABAJO" EntityType="Self.ORDEN_TRABAJO" />
-          <EntitySet Name="SERVICIOS" EntityType="Self.SERVICIOS" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="TECNICOS" EntityType="Self.TECNICOS" />
-          <EntitySet Name="DETALLE_CONTRATO" EntityType="Self.DETALLE_CONTRATO" />
-          <EntitySet Name="viewClientesActivos" EntityType="Self.viewClientesActivos" />
-          <EntitySet Name="viewClientesInactivos" EntityType="Self.viewClientesInactivos" />
-          <EntitySet Name="viewClientesxTecnico" EntityType="Self.viewClientesxTecnico" />
-          <EntitySet Name="viewContratacionxPaquete" EntityType="Self.viewContratacionxPaquete" />
-          <EntitySet Name="viewContratoMasContratado" EntityType="Self.viewContratoMasContratado" />
-          <EntitySet Name="viewGananciasxPaquetes" EntityType="Self.viewGananciasxPaquetes" />
-          <EntitySet Name="viewServiciosFueraDePaquetes" EntityType="Self.viewServiciosFueraDePaquetes" />
-          <AssociationSet Name="FK__CONTRATOS__clien__24285DB4" Association="Self.FK__CONTRATOS__clien__24285DB4">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ORDEN_TRA__clien__18B6AB08" Association="Self.FK__ORDEN_TRA__clien__18B6AB08">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClienteID" Association="Self.FK_ClienteID">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_C__contr__67DE6983" Association="Self.FK__DETALLE_C__contr__67DE6983">
-            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
-            <End Role="DETALLE_CONTRATO" EntitySet="DETALLE_CONTRATO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contrato_Orden_Trabajo" Association="Self.FK_Contrato_Orden_Trabajo">
-            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
-            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tecnico" Association="Self.FK_Tecnico">
-            <End Role="TECNICOS" EntitySet="TECNICOS" />
-            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_F__factu__75035A77" Association="Self.FK__DETALLE_F__factu__75035A77">
-            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
             <End Role="DETALLE_FACTURA_SERVICIO" EntitySet="DETALLE_FACTURA_SERVICIO" />
           </AssociationSet>
           <AssociationSet Name="FK__DETALLE_O__orden__40C49C62" Association="Self.FK__DETALLE_O__orden__40C49C62">
@@ -1274,14 +773,28 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
             <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
           </AssociationSet>
-          <AssociationSet Name="FK__FACTURA_S__servi__336AA144" Association="Self.FK__FACTURA_S__servi__336AA144">
-            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+          <AssociationSet Name="FK__ORDEN_TRA__clien__18B6AB08" Association="Self.FK__ORDEN_TRA__clien__18B6AB08">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteID" Association="Self.FK_ClienteID">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_C__servi__68D28DBC" Association="Self.FK__DETALLE_C__servi__68D28DBC">
-            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
-            <End Role="DETALLE_CONTRATO" EntitySet="DETALLE_CONTRATO" />
+          <AssociationSet Name="FK_Contrato_Orden_Trabajo" Association="Self.FK_Contrato_Orden_Trabajo">
+            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tecnico" Association="Self.FK_Tecnico">
+            <End Role="TECNICOS" EntitySet="TECNICOS" />
+            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -1338,6 +851,7 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <Parameter Name="isv" Mode="In" Type="Double" />
             <Parameter Name="cantidad" Mode="In" Type="Int32" />
             <Parameter Name="total" Mode="In" Type="Double" />
+            <Parameter Name="servicioID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spAddDetalleOrdenTrabajo">
             <Parameter Name="ordentrabajoid" Mode="In" Type="Decimal" />
@@ -1357,7 +871,6 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <Parameter Name="hasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="spAddFacturaServicio">
-            <Parameter Name="servicioID" Mode="In" Type="Decimal" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
             <Parameter Name="clienteID" Mode="In" Type="Decimal" />
             <Parameter Name="estado" Mode="In" Type="String" />
@@ -1392,40 +905,40 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <Parameter Name="area" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spClientesPorServicio" ReturnType="Collection(DBModel.spClientesPorServicio_Result)">
-            <Parameter Name="Servicio" Mode="In" Type="Decimal" />
+          <Parameter Name="Servicio" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteCliente">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spDeleteContrato">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteDetalleContrato">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteDetalleFactura">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteDetalleOrdenTrabajo">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteDetallePaquete">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteDisponibilidadTecnico">
-            <Parameter Name="registroID" Mode="In" Type="Decimal" />
+          <Parameter Name="registroID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteFacturaServicio">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteOrdenTrabajo">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteServicios">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spDeleteTecnico">
-            <Parameter Name="id" Mode="In" Type="Decimal" />
+          <Parameter Name="id" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spFacturaMensual">
             <Parameter Name="clienteID" Mode="In" Type="Decimal" />
@@ -1433,13 +946,13 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           </FunctionImport>
           <FunctionImport Name="spFacturasMorosas" ReturnType="Collection(Int32)" />
           <FunctionImport Name="spFinalizarOrdenTrabajo">
-            <Parameter Name="idOrdenTrabajo" Mode="In" Type="Decimal" />
+          <Parameter Name="idOrdenTrabajo" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spReadContrato">
-            <Parameter Name="contratoID" Mode="In" Type="Decimal" />
+          <Parameter Name="contratoID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spServiciosRealizados">
-            <Parameter Name="clienteID" Mode="In" Type="Decimal" />
+          <Parameter Name="clienteID" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spUOWordenTrabajo" ReturnType="Collection(DBModel.spUOWordenTrabajo_Result)">
             <Parameter Name="cliente" Mode="In" Type="Decimal" />
@@ -1461,35 +974,42 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           <FunctionImport Name="spUpdateContrato" ReturnType="Collection(Int32)">
             <Parameter Name="contratoID" Mode="In" Type="Decimal" />
             <Parameter Name="clienteID" Mode="In" Type="Decimal" />
-            <Parameter Name="tecnicoID" Mode="In" Type="Decimal" />
-            <Parameter Name="fechaFinalizacion" Mode="In" Type="DateTime" />
             <Parameter Name="fechaContrato" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFinalizacion" Mode="In" Type="DateTime" />
+            <Parameter Name="tecnicoID" Mode="In" Type="Decimal" />
             <Parameter Name="retrasos" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUpdateDetalleContrato">
             <Parameter Name="id" Mode="In" Type="Decimal" />
             <Parameter Name="contratoID" Mode="In" Type="Decimal" />
             <Parameter Name="servicioID" Mode="In" Type="Decimal" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="realizado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUpdateDetalleFactura">
             <Parameter Name="id" Mode="In" Type="Decimal" />
             <Parameter Name="facturaID" Mode="In" Type="Decimal" />
-            <Parameter Name="ordenID" Mode="In" Type="Decimal" />
+            <Parameter Name="precio" Mode="In" Type="Double" />
+            <Parameter Name="isv" Mode="In" Type="Double" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="total" Mode="In" Type="Double" />
+            <Parameter Name="Servicio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUpdateDetalleOrdenTrabajo">
             <Parameter Name="id" Mode="In" Type="Decimal" />
             <Parameter Name="ordentrabajoID" Mode="In" Type="Decimal" />
             <Parameter Name="tecnicoID" Mode="In" Type="Decimal" />
             <Parameter Name="servicioID" Mode="In" Type="Decimal" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="contratoid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spUpdateDetallePaquete" ReturnType="Collection(Int32)">
             <Parameter Name="id" Mode="In" Type="Decimal" />
             <Parameter Name="ServicioID" Mode="In" Type="Decimal" />
             <Parameter Name="PaqueteID" Mode="In" Type="Decimal" />
-            <Parameter Name="sc" Mode="In" Type="Decimal" />
-            <Parameter Name="pc" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="spUpdateDisponibilidadTecnico">
+            <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="tecnicoID" Mode="In" Type="Decimal" />
             <Parameter Name="estado" Mode="In" Type="String" />
             <Parameter Name="desde" Mode="In" Type="DateTime" />
@@ -1497,9 +1017,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           </FunctionImport>
           <FunctionImport Name="spUpdateFacturaServicio">
             <Parameter Name="id" Mode="In" Type="Decimal" />
-            <Parameter Name="clienteID" Mode="In" Type="Decimal" />
-            <Parameter Name="servicioID" Mode="In" Type="Decimal" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="clienteID" Mode="In" Type="Decimal" />
             <Parameter Name="estado" Mode="In" Type="String" />
             <Parameter Name="ordenID" Mode="In" Type="Decimal" />
           </FunctionImport>
@@ -1522,7 +1041,110 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <Parameter Name="telefono" Mode="In" Type="String" />
             <Parameter Name="area" Mode="In" Type="String" />
           </FunctionImport>
-        </EntityContainer>
+          <FunctionImport Name="fClientesI" IsComposable="true" ReturnType="Collection(DBModel.fClientesI_Result)">
+          <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fDetalleServicioIndividualContratado" IsComposable="true" ReturnType="Collection(DBModel.fDetalleServicioIndividualContratado_Result)">
+          <Parameter Name="servicioID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fFacturaMensual" IsComposable="true" ReturnType="Collection(DBModel.fFacturaMensual_Result)">
+          <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fHorasTrabajoTecnico" IsComposable="true" ReturnType="Collection(DBModel.fHorasTrabajoTecnico_Result)">
+            <Parameter Name="fechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="fechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="fOrdenxCliente" IsComposable="true" ReturnType="Collection(DBModel.fOrdenxCliente_Result)">
+            <Parameter Name="ClienteID" Mode="In" Type="Int32" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spFacturasPorMesDeXCliente" ReturnType="Collection(DBModel.spFacturasPorMesDeXCliente_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CLIENTE" EntityType="DBModel.CLIENTE" />
+          <EntitySet Name="CONTRATOS" EntityType="DBModel.CONTRATOS" />
+          <EntitySet Name="DETALLE_FACTURA_SERVICIO" EntityType="DBModel.DETALLE_FACTURA_SERVICIO" />
+          <EntitySet Name="DETALLE_ORDEN_TRABAJO" EntityType="DBModel.DETALLE_ORDEN_TRABAJO" />
+          <EntitySet Name="DETALLE_PAQUETE" EntityType="DBModel.DETALLE_PAQUETE" />
+          <EntitySet Name="DISPONIBILIDAD_TECNICOS" EntityType="DBModel.DISPONIBILIDAD_TECNICOS" />
+          <EntitySet Name="FACTURA_SERVICIO" EntityType="DBModel.FACTURA_SERVICIO" />
+          <EntitySet Name="ORDEN_TRABAJO" EntityType="DBModel.ORDEN_TRABAJO" />
+          <EntitySet Name="SERVICIOS" EntityType="DBModel.SERVICIOS" />
+          <EntitySet Name="sysdiagrams" EntityType="DBModel.sysdiagrams" />
+          <EntitySet Name="TECNICOS" EntityType="DBModel.TECNICOS" />
+          <EntitySet Name="DETALLE_CONTRATO" EntityType="DBModel.DETALLE_CONTRATO" />
+          <EntitySet Name="viewClientesActivos" EntityType="DBModel.viewClientesActivos" />
+          <EntitySet Name="viewClientesInactivos" EntityType="DBModel.viewClientesInactivos" />
+          <EntitySet Name="viewClientesxTecnico" EntityType="DBModel.viewClientesxTecnico" />
+          <EntitySet Name="viewContratacionxPaquete" EntityType="DBModel.viewContratacionxPaquete" />
+          <EntitySet Name="viewContratoMasContratado" EntityType="DBModel.viewContratoMasContratado" />
+          <EntitySet Name="viewGananciasxPaquetes" EntityType="DBModel.viewGananciasxPaquetes" />
+          <EntitySet Name="viewServiciosFueraDePaquetes" EntityType="DBModel.viewServiciosFueraDePaquetes" />
+          <AssociationSet Name="FK__CONTRATOS__clien__24285DB4" Association="DBModel.FK__CONTRATOS__clien__24285DB4">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDEN_TRA__clien__18B6AB08" Association="DBModel.FK__ORDEN_TRA__clien__18B6AB08">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteID" Association="DBModel.FK_ClienteID">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_C__contr__67DE6983" Association="DBModel.FK__DETALLE_C__contr__67DE6983">
+            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
+            <End Role="DETALLE_CONTRATO" EntitySet="DETALLE_CONTRATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contrato_Orden_Trabajo" Association="DBModel.FK_Contrato_Orden_Trabajo">
+            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tecnico" Association="DBModel.FK_Tecnico">
+            <End Role="TECNICOS" EntitySet="TECNICOS" />
+            <End Role="CONTRATOS" EntitySet="CONTRATOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_F__factu__75035A77" Association="DBModel.FK__DETALLE_F__factu__75035A77">
+            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
+            <End Role="DETALLE_FACTURA_SERVICIO" EntitySet="DETALLE_FACTURA_SERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_F__servi__4AD81681" Association="DBModel.FK__DETALLE_F__servi__4AD81681">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="DETALLE_FACTURA_SERVICIO" EntitySet="DETALLE_FACTURA_SERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__orden__40C49C62" Association="DBModel.FK__DETALLE_O__orden__40C49C62">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__servi__5B78929E" Association="DBModel.FK__DETALLE_O__servi__5B78929E">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__tecni__5A846E65" Association="DBModel.FK__DETALLE_O__tecni__5A846E65">
+            <End Role="TECNICOS" EntitySet="TECNICOS" />
+            <End Role="DETALLE_ORDEN_TRABAJO" EntitySet="DETALLE_ORDEN_TRABAJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_P__paque__2F9A1060" Association="DBModel.FK__DETALLE_P__paque__2F9A1060">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="DETALLE_PAQUETE" EntitySet="DETALLE_PAQUETE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_P__servi__2EA5EC27" Association="DBModel.FK__DETALLE_P__servi__2EA5EC27">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="DETALLE_PAQUETE" EntitySet="DETALLE_PAQUETE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DISPONIBI__tecni__55BFB948" Association="DBModel.FK__DISPONIBI__tecni__55BFB948">
+            <End Role="TECNICOS" EntitySet="TECNICOS" />
+            <End Role="DISPONIBILIDAD_TECNICOS" EntitySet="DISPONIBILIDAD_TECNICOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACTURA_S__orden__7E8CC4B1" Association="DBModel.FK__FACTURA_S__orden__7E8CC4B1">
+            <End Role="ORDEN_TRABAJO" EntitySet="ORDEN_TRABAJO" />
+            <End Role="FACTURA_SERVICIO" EntitySet="FACTURA_SERVICIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_C__servi__68D28DBC" Association="DBModel.FK__DETALLE_C__servi__68D28DBC">
+            <End Role="SERVICIOS" EntitySet="SERVICIOS" />
+            <End Role="DETALLE_CONTRATO" EntitySet="DETALLE_CONTRATO" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -1549,213 +1171,458 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           <Property Type="Decimal" Name="tecnicoID" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Decimal" Name="id" Nullable="false" Precision="18" Scale="0" />
         </ComplexType>
-      </Schema>
+        <ComplexType Name="fClientesI_Result">
+          <Property Type="Int32" Name="ServicioID" Nullable="true" />
+          <Property Type="String" Name="NombreServicio" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="fDetalleServicioIndividualContratado_Result">
+          <Property Type="Int32" Name="Clienteid" Nullable="true" />
+          <Property Type="Int32" Name="contratoID" Nullable="true" />
+          <Property Type="DateTime" Name="FechaInico" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="fFacturaMensual_Result">
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" Precision="10" />
+          <Property Type="Int32" Name="ServicioID" Nullable="true" />
+          <Property Type="String" Name="NombreServicio" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="PrecioServicio" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="fHorasTrabajoTecnico_Result">
+          <Property Type="String" Name="tecnico" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="horas" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="fOrdenxCliente_Result">
+          <Property Type="Int32" Name="OrdeTrabajoID" Nullable="true" />
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaInicio" Nullable="true" Precision="10" />
+          <Property Type="DateTime" Name="FechaFinal" Nullable="true" Precision="10" />
+        </ComplexType>
+        <ComplexType Name="spFacturasPorMesDeXCliente_Result">
+          <Property Type="Int32" Name="ClienteID" Nullable="true" />
+          <Property Type="Int32" Name="ano" Nullable="true" />
+          <Property Type="Int32" Name="mes" Nullable="true" />
+          <Property Type="Double" Name="total" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="28" Scale="0" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RTN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTRATOS" Relationship="DBModel.FK__CONTRATOS__clien__24285DB4" FromRole="CLIENTE" ToRole="CONTRATOS" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="DBModel.FK__ORDEN_TRA__clien__18B6AB08" FromRole="CLIENTE" ToRole="ORDEN_TRABAJO" />
+          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="DBModel.FK_ClienteID" FromRole="CLIENTE" ToRole="FACTURA_SERVICIO" />
+        </EntityType>
+        <EntityType Name="CONTRATOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="clienteID" Type="Decimal" Precision="28" Scale="0" />
+          <Property Name="fechaContrato" Type="DateTime" Precision="0" />
+          <Property Name="fechaFinalizacion" Type="DateTime" Precision="0" />
+          <Property Name="tecnicoID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="retrasos" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CLIENTE" Relationship="DBModel.FK__CONTRATOS__clien__24285DB4" FromRole="CONTRATOS" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_CONTRATO" Relationship="DBModel.FK__DETALLE_C__contr__67DE6983" FromRole="CONTRATOS" ToRole="DETALLE_CONTRATO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="DBModel.FK_Contrato_Orden_Trabajo" FromRole="CONTRATOS" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="TECNICOS" Relationship="DBModel.FK_Tecnico" FromRole="CONTRATOS" ToRole="TECNICOS" />
+        </EntityType>
+        <EntityType Name="DETALLE_FACTURA_SERVICIO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="facturaID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="isv" Type="Double" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="total" Type="Double" />
+          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="DBModel.FK__DETALLE_F__factu__75035A77" FromRole="DETALLE_FACTURA_SERVICIO" ToRole="FACTURA_SERVICIO" />
+          <NavigationProperty Name="SERVICIOS" Relationship="DBModel.FK__DETALLE_F__servi__4AD81681" FromRole="DETALLE_FACTURA_SERVICIO" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN_TRABAJO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ordenTrabajoID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="tecnicoId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="contratoID" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CONTRATOS" Relationship="DBModel.FK_Contrato_Orden_Trabajo" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="CONTRATOS" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="DBModel.FK__DETALLE_O__orden__40C49C62" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="ORDEN_TRABAJO" />
+          <NavigationProperty Name="SERVICIOS" Relationship="DBModel.FK__DETALLE_O__servi__5B78929E" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="SERVICIOS" />
+          <NavigationProperty Name="TECNICOS" Relationship="DBModel.FK__DETALLE_O__tecni__5A846E65" FromRole="DETALLE_ORDEN_TRABAJO" ToRole="TECNICOS" />
+        </EntityType>
+        <EntityType Name="DETALLE_PAQUETE">
+          <Key>
+            <PropertyRef Name="servicioID" />
+            <PropertyRef Name="paqueteID" />
+          </Key>
+          <Property Name="servicioID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="paqueteID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="SERVICIOS" Relationship="DBModel.FK__DETALLE_P__paque__2F9A1060" FromRole="DETALLE_PAQUETE" ToRole="SERVICIOS" />
+          <NavigationProperty Name="SERVICIOS1" Relationship="DBModel.FK__DETALLE_P__servi__2EA5EC27" FromRole="DETALLE_PAQUETE" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="DISPONIBILIDAD_TECNICOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="desde" Type="DateTime" Precision="3" />
+          <Property Name="hasta" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="tecnicoID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="TECNICOS" Relationship="DBModel.FK__DISPONIBI__tecni__55BFB948" FromRole="DISPONIBILIDAD_TECNICOS" ToRole="TECNICOS" />
+        </EntityType>
+        <EntityType Name="FACTURA_SERVICIO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="clienteID" Type="Decimal" Nullable="false" Precision="28" Scale="0" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="ordenID" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CLIENTE" Relationship="DBModel.FK_ClienteID" FromRole="FACTURA_SERVICIO" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_FACTURA_SERVICIO" Relationship="DBModel.FK__DETALLE_F__factu__75035A77" FromRole="FACTURA_SERVICIO" ToRole="DETALLE_FACTURA_SERVICIO" />
+          <NavigationProperty Name="ORDEN_TRABAJO" Relationship="DBModel.FK__FACTURA_S__orden__7E8CC4B1" FromRole="FACTURA_SERVICIO" ToRole="ORDEN_TRABAJO" />
+        </EntityType>
+        <EntityType Name="ORDEN_TRABAJO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="clienteID" Type="Decimal" Precision="28" Scale="0" />
+          <Property Name="fechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="fechaFinal" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="DBModel.FK__ORDEN_TRA__clien__18B6AB08" FromRole="ORDEN_TRABAJO" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="DBModel.FK__DETALLE_O__orden__40C49C62" FromRole="ORDEN_TRABAJO" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="FACTURA_SERVICIO" Relationship="DBModel.FK__FACTURA_S__orden__7E8CC4B1" FromRole="ORDEN_TRABAJO" ToRole="FACTURA_SERVICIO" />
+        </EntityType>
+        <EntityType Name="SERVICIOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="tipo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DETALLE_FACTURA_SERVICIO" Relationship="DBModel.FK__DETALLE_F__servi__4AD81681" FromRole="SERVICIOS" ToRole="DETALLE_FACTURA_SERVICIO" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="DBModel.FK__DETALLE_O__servi__5B78929E" FromRole="SERVICIOS" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="DETALLE_PAQUETE" Relationship="DBModel.FK__DETALLE_P__paque__2F9A1060" FromRole="SERVICIOS" ToRole="DETALLE_PAQUETE" />
+          <NavigationProperty Name="DETALLE_PAQUETE1" Relationship="DBModel.FK__DETALLE_P__servi__2EA5EC27" FromRole="SERVICIOS" ToRole="DETALLE_PAQUETE" />
+          <NavigationProperty Name="DETALLE_CONTRATO" Relationship="DBModel.FK__DETALLE_C__servi__68D28DBC" FromRole="SERVICIOS" ToRole="DETALLE_CONTRATO" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TECNICOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="area" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTRATOS" Relationship="DBModel.FK_Tecnico" FromRole="TECNICOS" ToRole="CONTRATOS" />
+          <NavigationProperty Name="DETALLE_ORDEN_TRABAJO" Relationship="DBModel.FK__DETALLE_O__tecni__5A846E65" FromRole="TECNICOS" ToRole="DETALLE_ORDEN_TRABAJO" />
+          <NavigationProperty Name="DISPONIBILIDAD_TECNICOS" Relationship="DBModel.FK__DISPONIBI__tecni__55BFB948" FromRole="TECNICOS" ToRole="DISPONIBILIDAD_TECNICOS" />
+        </EntityType>
+        <EntityType Name="DETALLE_CONTRATO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="contratoID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="servicioID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="realizado" Type="Int32" />
+          <NavigationProperty Name="CONTRATOS" Relationship="DBModel.FK__DETALLE_C__contr__67DE6983" FromRole="DETALLE_CONTRATO" ToRole="CONTRATOS" />
+          <NavigationProperty Name="SERVICIOS" Relationship="DBModel.FK__DETALLE_C__servi__68D28DBC" FromRole="DETALLE_CONTRATO" ToRole="SERVICIOS" />
+        </EntityType>
+        <EntityType Name="viewClientesActivos">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="28" Scale="0" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RTN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="viewClientesInactivos">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="28" Scale="0" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RTN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="viewClientesxTecnico">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cliente" Type="Int32" />
+        </EntityType>
+        <EntityType Name="viewContratacionxPaquete">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+        </EntityType>
+        <EntityType Name="viewContratoMasContratado">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+        </EntityType>
+        <EntityType Name="viewGananciasxPaquetes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" />
+        </EntityType>
+        <EntityType Name="viewServiciosFueraDePaquetes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__CONTRATOS__clien__24285DB4">
+          <End Type="DBModel.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+          <End Type="DBModel.CONTRATOS" Role="CONTRATOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CONTRATOS">
+              <PropertyRef Name="clienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN_TRA__clien__18B6AB08">
+          <End Type="DBModel.CLIENTE" Role="CLIENTE" Multiplicity="0..1" />
+          <End Type="DBModel.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ORDEN_TRABAJO">
+              <PropertyRef Name="clienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteID">
+          <End Type="DBModel.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="DBModel.FACTURA_SERVICIO" Role="FACTURA_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FACTURA_SERVICIO">
+              <PropertyRef Name="clienteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_C__contr__67DE6983">
+          <End Type="DBModel.CONTRATOS" Role="CONTRATOS" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_CONTRATO" Role="DETALLE_CONTRATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRATOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_CONTRATO">
+              <PropertyRef Name="contratoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contrato_Orden_Trabajo">
+          <End Type="DBModel.CONTRATOS" Role="CONTRATOS" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRATOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="contratoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tecnico">
+          <End Type="DBModel.TECNICOS" Role="TECNICOS" Multiplicity="0..1" />
+          <End Type="DBModel.CONTRATOS" Role="CONTRATOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNICOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CONTRATOS">
+              <PropertyRef Name="tecnicoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_F__factu__75035A77">
+          <End Type="DBModel.FACTURA_SERVICIO" Role="FACTURA_SERVICIO" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_FACTURA_SERVICIO" Role="DETALLE_FACTURA_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA_SERVICIO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_FACTURA_SERVICIO">
+              <PropertyRef Name="facturaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_F__servi__4AD81681">
+          <End Type="DBModel.SERVICIOS" Role="SERVICIOS" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_FACTURA_SERVICIO" Role="DETALLE_FACTURA_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_FACTURA_SERVICIO">
+              <PropertyRef Name="servicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__orden__40C49C62">
+          <End Type="DBModel.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="ordenTrabajoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__servi__5B78929E">
+          <End Type="DBModel.SERVICIOS" Role="SERVICIOS" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="servicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__tecni__5A846E65">
+          <End Type="DBModel.TECNICOS" Role="TECNICOS" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_ORDEN_TRABAJO" Role="DETALLE_ORDEN_TRABAJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNICOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN_TRABAJO">
+              <PropertyRef Name="tecnicoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_P__paque__2F9A1060">
+          <End Type="DBModel.SERVICIOS" Role="SERVICIOS" Multiplicity="1" />
+          <End Type="DBModel.DETALLE_PAQUETE" Role="DETALLE_PAQUETE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_PAQUETE">
+              <PropertyRef Name="paqueteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_P__servi__2EA5EC27">
+          <End Type="DBModel.SERVICIOS" Role="SERVICIOS" Multiplicity="1" />
+          <End Type="DBModel.DETALLE_PAQUETE" Role="DETALLE_PAQUETE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_PAQUETE">
+              <PropertyRef Name="servicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DISPONIBI__tecni__55BFB948">
+          <End Type="DBModel.TECNICOS" Role="TECNICOS" Multiplicity="0..1" />
+          <End Type="DBModel.DISPONIBILIDAD_TECNICOS" Role="DISPONIBILIDAD_TECNICOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TECNICOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DISPONIBILIDAD_TECNICOS">
+              <PropertyRef Name="tecnicoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACTURA_S__orden__7E8CC4B1">
+          <End Type="DBModel.ORDEN_TRABAJO" Role="ORDEN_TRABAJO" Multiplicity="0..1" />
+          <End Type="DBModel.FACTURA_SERVICIO" Role="FACTURA_SERVICIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_TRABAJO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FACTURA_SERVICIO">
+              <PropertyRef Name="ordenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_C__servi__68D28DBC">
+          <End Type="DBModel.SERVICIOS" Role="SERVICIOS" Multiplicity="0..1" />
+          <End Type="DBModel.DETALLE_CONTRATO" Role="DETALLE_CONTRATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DETALLE_CONTRATO">
+              <PropertyRef Name="servicioID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBEntities">
-          <EntitySetMapping Name="CLIENTE">
-            <EntityTypeMapping TypeName="DBModel.CLIENTE">
-              <MappingFragment StoreEntitySet="CLIENTE">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="RTN" ColumnName="RTN" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CONTRATOS">
-            <EntityTypeMapping TypeName="DBModel.CONTRATOS">
-              <MappingFragment StoreEntitySet="CONTRATOS">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="clienteID" ColumnName="clienteID" />
-                <ScalarProperty Name="fechaContrato" ColumnName="fechaContrato" />
-                <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
-                <ScalarProperty Name="tecnicoID" ColumnName="tecnicoID" />
-                <ScalarProperty Name="retrasos" ColumnName="retrasos" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_FACTURA_SERVICIO">
-            <EntityTypeMapping TypeName="DBModel.DETALLE_FACTURA_SERVICIO">
-              <MappingFragment StoreEntitySet="DETALLE_FACTURA_SERVICIO">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="facturaID" ColumnName="facturaID" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="isv" ColumnName="isv" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="total" ColumnName="total" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
-            <EntityTypeMapping TypeName="DBModel.DETALLE_ORDEN_TRABAJO">
-              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="ordenTrabajoID" ColumnName="ordenTrabajoID" />
-                <ScalarProperty Name="tecnicoId" ColumnName="tecnicoId" />
-                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="contratoID" ColumnName="contratoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_PAQUETE">
-            <EntityTypeMapping TypeName="DBModel.DETALLE_PAQUETE">
-              <MappingFragment StoreEntitySet="DETALLE_PAQUETE">
-                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
-                <ScalarProperty Name="paqueteID" ColumnName="paqueteID" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DISPONIBILIDAD_TECNICOS">
-            <EntityTypeMapping TypeName="DBModel.DISPONIBILIDAD_TECNICOS">
-              <MappingFragment StoreEntitySet="DISPONIBILIDAD_TECNICOS">
-                <ScalarProperty Name="desde" ColumnName="desde" />
-                <ScalarProperty Name="hasta" ColumnName="hasta" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="tecnicoID" ColumnName="tecnicoID" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FACTURA_SERVICIO">
-            <EntityTypeMapping TypeName="DBModel.FACTURA_SERVICIO">
-              <MappingFragment StoreEntitySet="FACTURA_SERVICIO">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
-                <ScalarProperty Name="clienteID" ColumnName="clienteID" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="ordenID" ColumnName="ordenID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ORDEN_TRABAJO">
-            <EntityTypeMapping TypeName="DBModel.ORDEN_TRABAJO">
-              <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="clienteID" ColumnName="clienteID" />
-                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
-                <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SERVICIOS">
-            <EntityTypeMapping TypeName="DBModel.SERVICIOS">
-              <MappingFragment StoreEntitySet="SERVICIOS">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TECNICOS">
-            <EntityTypeMapping TypeName="DBModel.TECNICOS">
-              <MappingFragment StoreEntitySet="TECNICOS">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="area" ColumnName="area" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DETALLE_CONTRATO">
-            <EntityTypeMapping TypeName="DBModel.DETALLE_CONTRATO">
-              <MappingFragment StoreEntitySet="DETALLE_CONTRATO">
-                <ScalarProperty Name="contratoID" ColumnName="contratoID" />
-                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="realizado" ColumnName="realizado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewClientesActivos">
-            <EntityTypeMapping TypeName="DBModel.viewClientesActivos">
-              <MappingFragment StoreEntitySet="viewClientesActivos">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="RTN" ColumnName="RTN" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewClientesInactivos">
-            <EntityTypeMapping TypeName="DBModel.viewClientesInactivos">
-              <MappingFragment StoreEntitySet="viewClientesInactivos">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="RTN" ColumnName="RTN" />
-                <ScalarProperty Name="telefono" ColumnName="telefono" />
-                <ScalarProperty Name="direccion" ColumnName="direccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewClientesxTecnico">
-            <EntityTypeMapping TypeName="DBModel.viewClientesxTecnico">
-              <MappingFragment StoreEntitySet="viewClientesxTecnico">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewContratacionxPaquete">
-            <EntityTypeMapping TypeName="DBModel.viewContratacionxPaquete">
-              <MappingFragment StoreEntitySet="viewContratacionxPaquete">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewContratoMasContratado">
-            <EntityTypeMapping TypeName="DBModel.viewContratoMasContratado">
-              <MappingFragment StoreEntitySet="viewContratoMasContratado">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewGananciasxPaquetes">
-            <EntityTypeMapping TypeName="DBModel.viewGananciasxPaquetes">
-              <MappingFragment StoreEntitySet="viewGananciasxPaquetes">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="viewServiciosFueraDePaquetes">
-            <EntityTypeMapping TypeName="DBModel.viewServiciosFueraDePaquetes">
-              <MappingFragment StoreEntitySet="viewServiciosFueraDePaquetes">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DBModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DBModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DBModel.Store.sp_dropdiagram" />
@@ -1843,7 +1710,208 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           <FunctionImportMapping FunctionImportName="spUpdateOrdenTrabajo" FunctionName="DBModel.Store.spUpdateOrdenTrabajo" />
           <FunctionImportMapping FunctionImportName="spUpdateServicios" FunctionName="DBModel.Store.spUpdateServicios" />
           <FunctionImportMapping FunctionImportName="spUpdateTecnico" FunctionName="DBModel.Store.spUpdateTecnico" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="DBModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="RTN" ColumnName="RTN" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTRATOS">
+            <EntityTypeMapping TypeName="DBModel.CONTRATOS">
+              <MappingFragment StoreEntitySet="CONTRATOS">
+                <ScalarProperty Name="retrasos" ColumnName="retrasos" />
+                <ScalarProperty Name="tecnicoID" ColumnName="tecnicoID" />
+                <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
+                <ScalarProperty Name="fechaContrato" ColumnName="fechaContrato" />
+                <ScalarProperty Name="clienteID" ColumnName="clienteID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_FACTURA_SERVICIO">
+            <EntityTypeMapping TypeName="DBModel.DETALLE_FACTURA_SERVICIO">
+              <MappingFragment StoreEntitySet="DETALLE_FACTURA_SERVICIO">
+                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="isv" ColumnName="isv" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="facturaID" ColumnName="facturaID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN_TRABAJO">
+            <EntityTypeMapping TypeName="DBModel.DETALLE_ORDEN_TRABAJO">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN_TRABAJO">
+                <ScalarProperty Name="contratoID" ColumnName="contratoID" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
+                <ScalarProperty Name="tecnicoId" ColumnName="tecnicoId" />
+                <ScalarProperty Name="ordenTrabajoID" ColumnName="ordenTrabajoID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_PAQUETE">
+            <EntityTypeMapping TypeName="DBModel.DETALLE_PAQUETE">
+              <MappingFragment StoreEntitySet="DETALLE_PAQUETE">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="paqueteID" ColumnName="paqueteID" />
+                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DISPONIBILIDAD_TECNICOS">
+            <EntityTypeMapping TypeName="DBModel.DISPONIBILIDAD_TECNICOS">
+              <MappingFragment StoreEntitySet="DISPONIBILIDAD_TECNICOS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tecnicoID" ColumnName="tecnicoID" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="hasta" ColumnName="hasta" />
+                <ScalarProperty Name="desde" ColumnName="desde" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA_SERVICIO">
+            <EntityTypeMapping TypeName="DBModel.FACTURA_SERVICIO">
+              <MappingFragment StoreEntitySet="FACTURA_SERVICIO">
+                <ScalarProperty Name="ordenID" ColumnName="ordenID" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="clienteID" ColumnName="clienteID" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_TRABAJO">
+            <EntityTypeMapping TypeName="DBModel.ORDEN_TRABAJO">
+              <MappingFragment StoreEntitySet="ORDEN_TRABAJO">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fechaFinal" ColumnName="fechaFinal" />
+                <ScalarProperty Name="fechaInicio" ColumnName="fechaInicio" />
+                <ScalarProperty Name="clienteID" ColumnName="clienteID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIOS">
+            <EntityTypeMapping TypeName="DBModel.SERVICIOS">
+              <MappingFragment StoreEntitySet="SERVICIOS">
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TECNICOS">
+            <EntityTypeMapping TypeName="DBModel.TECNICOS">
+              <MappingFragment StoreEntitySet="TECNICOS">
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_CONTRATO">
+            <EntityTypeMapping TypeName="DBModel.DETALLE_CONTRATO">
+              <MappingFragment StoreEntitySet="DETALLE_CONTRATO">
+                <ScalarProperty Name="realizado" ColumnName="realizado" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
+                <ScalarProperty Name="contratoID" ColumnName="contratoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewClientesActivos">
+            <EntityTypeMapping TypeName="DBModel.viewClientesActivos">
+              <MappingFragment StoreEntitySet="viewClientesActivos">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="RTN" ColumnName="RTN" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewClientesInactivos">
+            <EntityTypeMapping TypeName="DBModel.viewClientesInactivos">
+              <MappingFragment StoreEntitySet="viewClientesInactivos">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="RTN" ColumnName="RTN" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewClientesxTecnico">
+            <EntityTypeMapping TypeName="DBModel.viewClientesxTecnico">
+              <MappingFragment StoreEntitySet="viewClientesxTecnico">
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewContratacionxPaquete">
+            <EntityTypeMapping TypeName="DBModel.viewContratacionxPaquete">
+              <MappingFragment StoreEntitySet="viewContratacionxPaquete">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewContratoMasContratado">
+            <EntityTypeMapping TypeName="DBModel.viewContratoMasContratado">
+              <MappingFragment StoreEntitySet="viewContratoMasContratado">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewGananciasxPaquetes">
+            <EntityTypeMapping TypeName="DBModel.viewGananciasxPaquetes">
+              <MappingFragment StoreEntitySet="viewGananciasxPaquetes">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewServiciosFueraDePaquetes">
+            <EntityTypeMapping TypeName="DBModel.viewServiciosFueraDePaquetes">
+              <MappingFragment StoreEntitySet="viewServiciosFueraDePaquetes">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
