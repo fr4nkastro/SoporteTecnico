@@ -10,12 +10,11 @@
 namespace DataAccess
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class viewContratoMasContratado
+    public partial class fServiciosEnPaquetes_Result
     {
-        public decimal ID { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<int> Cantidad { get; set; }
+        public Nullable<int> servicioID { get; set; }
+        public Nullable<int> paqueteID { get; set; }
+        public Nullable<int> id { get; set; }
     }
 }

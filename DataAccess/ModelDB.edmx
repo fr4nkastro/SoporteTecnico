@@ -27,8 +27,8 @@
           <Property Name="tecnicoID" Type="numeric" Precision="18" Scale="0" />
           <Property Name="retrasos" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.DETALLE_CONTRATO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.DETALLE_CONTRATO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="DETALLE_CONTRATO">
           <Key>
             <PropertyRef Name="id" />
@@ -129,8 +129,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.DETALLE_CONTRATO' does not h
           <Property Name="telefono" Type="varchar" MaxLength="10" />
           <Property Name="area" Type="varchar" MaxLength="15" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewClientesActivos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewClientesActivos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewClientesActivos">
           <Key>
             <PropertyRef Name="id" />
@@ -143,8 +143,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewClientesActivos' does no
           <Property Name="telefono" Type="varchar" MaxLength="10" />
           <Property Name="direccion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewClientesInactivos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewClientesInactivos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewClientesInactivos">
           <Key>
             <PropertyRef Name="id" />
@@ -157,8 +157,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewClientesInactivos' does 
           <Property Name="telefono" Type="varchar" MaxLength="10" />
           <Property Name="direccion" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewClientesxTecnico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewClientesxTecnico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewClientesxTecnico">
           <Key>
             <PropertyRef Name="ID" />
@@ -167,8 +167,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewClientesxTecnico' does n
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Cliente" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewContratacionxPaquete' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewContratacionxPaquete' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewContratacionxPaquete">
           <Key>
             <PropertyRef Name="ID" />
@@ -177,8 +177,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewContratacionxPaquete' do
           <Property Name="Nombre" Type="varchar" MaxLength="100" />
           <Property Name="Cantidad" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewContratoMasContratado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewContratoMasContratado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewContratoMasContratado">
           <Key>
             <PropertyRef Name="ID" />
@@ -187,15 +187,8 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewContratoMasContratado' d
           <Property Name="Nombre" Type="varchar" MaxLength="100" />
           <Property Name="Cantidad" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'ProyectoDBII_Last.dbo.viewDisponibilidadTecnico' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="viewDisponibilidadTecnico">
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Desde" Type="datetime" />
-          <Property Name="Hasta" Type="datetime" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewGananciasxPaquetes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewGananciasxPaquetes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewGananciasxPaquetes">
           <Key>
             <PropertyRef Name="ID" />
@@ -204,8 +197,26 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewGananciasxPaquetes' does
           <Property Name="Nombre" Type="varchar" MaxLength="100" />
           <Property Name="Precio" Type="float" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewPaquetes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="viewPaquetes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewServicios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="viewServicios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="viewServiciosFueraDePaquetes">
           <Key>
             <PropertyRef Name="id" />
@@ -406,6 +417,18 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="fServiciosEnPaquetes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="servicioID" Type="int" />
+                <Property Name="paqueteID" Type="int" />
+                <Property Name="id" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -500,6 +523,11 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
           <Parameter Name="fechafinal" Type="datetime" Mode="In" />
           <Parameter Name="estado" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="spAddServicioFull" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="precio" Type="float" Mode="In" />
+          <Parameter Name="tipo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spAddServicioNuevoAPaquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
           <Parameter Name="precio" Type="float" Mode="In" />
@@ -548,8 +576,15 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
         <Function Name="spDeleteServicios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="spDeleteServiciosFull" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="numeric" Mode="In" />
+        </Function>
         <Function Name="spDeleteTecnico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="spEliminarServicioPaquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="paquete" Type="int" Mode="In" />
+          <Parameter Name="servicio" Type="int" Mode="In" />
         </Function>
         <Function Name="spFacturaMensual" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="clienteID" Type="numeric" Mode="In" />
@@ -561,6 +596,9 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
         </Function>
         <Function Name="spReadContrato" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="contratoID" Type="numeric" Mode="In" />
+        </Function>
+        <Function Name="spServiciosEnPaquete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <Function Name="spServiciosRealizados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="clienteID" Type="numeric" Mode="In" />
@@ -725,6 +763,18 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
     [viewGananciasxPaquetes].[Nombre] AS [Nombre], 
     [viewGananciasxPaquetes].[Precio] AS [Precio]
     FROM [dbo].[viewGananciasxPaquetes] AS [viewGananciasxPaquetes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="viewPaquetes" EntityType="Self.viewPaquetes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewPaquetes].[id] AS [id], 
+    [viewPaquetes].[nombre] AS [nombre]
+    FROM [dbo].[viewPaquetes] AS [viewPaquetes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="viewServicios" EntityType="Self.viewServicios" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewServicios].[id] AS [id], 
+    [viewServicios].[nombre] AS [nombre]
+    FROM [dbo].[viewServicios] AS [viewServicios]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="viewServiciosFueraDePaquetes" EntityType="Self.viewServiciosFueraDePaquetes" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1151,6 +1201,26 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             <End Role="SERVICIOS" EntitySet="SERVICIOS" />
             <End Role="DETALLE_CONTRATO" EntitySet="DETALLE_CONTRATO" />
           </AssociationSet>
+          <EntitySet Name="viewPaquetes" EntityType="DBModel.viewPaquetes" />
+          <EntitySet Name="viewServicios" EntityType="DBModel.viewServicios" />
+          <FunctionImport Name="spAddServicioFull">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="precio" Mode="In" Type="Double" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spDeleteServiciosFull">
+          <Parameter Name="id" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarServicioPaquete">
+            <Parameter Name="paquete" Mode="In" Type="Int32" />
+            <Parameter Name="servicio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spServiciosEnPaquete" ReturnType="Collection(DBModel.spServiciosEnPaquete_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fServiciosEnPaquetes" IsComposable="true" ReturnType="Collection(DBModel.fServiciosEnPaquetes_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1624,6 +1694,30 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="viewPaquetes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="viewServicios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="spServiciosEnPaquete_Result">
+          <Property Type="Decimal" Name="servicioID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="paqueteID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="id" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="fServiciosEnPaquetes_Result">
+          <Property Type="Int32" Name="servicioID" Nullable="true" />
+          <Property Type="Int32" Name="paqueteID" Nullable="true" />
+          <Property Type="Int32" Name="id" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1918,6 +2012,43 @@ warning 6002: The table/view 'ProyectoDBII_Last.dbo.viewServiciosFueraDePaquetes
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="viewPaquetes">
+            <EntityTypeMapping TypeName="DBModel.viewPaquetes">
+              <MappingFragment StoreEntitySet="viewPaquetes">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewServicios">
+            <EntityTypeMapping TypeName="DBModel.viewServicios">
+              <MappingFragment StoreEntitySet="viewServicios">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spAddServicioFull" FunctionName="DBModel.Store.spAddServicioFull" />
+          <FunctionImportMapping FunctionImportName="spDeleteServiciosFull" FunctionName="DBModel.Store.spDeleteServiciosFull" />
+          <FunctionImportMapping FunctionImportName="spEliminarServicioPaquete" FunctionName="DBModel.Store.spEliminarServicioPaquete" />
+          <FunctionImportMapping FunctionImportName="spServiciosEnPaquete" FunctionName="DBModel.Store.spServiciosEnPaquete">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.spServiciosEnPaquete_Result">
+                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
+                <ScalarProperty Name="paqueteID" ColumnName="paqueteID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fServiciosEnPaquetes" FunctionName="DBModel.Store.fServiciosEnPaquetes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBModel.fServiciosEnPaquetes_Result">
+                <ScalarProperty Name="servicioID" ColumnName="servicioID" />
+                <ScalarProperty Name="paqueteID" ColumnName="paqueteID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
